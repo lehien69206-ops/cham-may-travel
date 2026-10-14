@@ -1,4 +1,4 @@
-<!DOCTYPE html>
++<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="utf-8">
@@ -350,6 +350,18 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <div><h3>Nhận tin</h3><form id="news"><label class="f" style="color:var(--on)">Email<input type="email" id="n-mail" style="background:var(--bg)"></label><button class="btn" style="margin-top:8px" type="submit">Đăng ký</button><div id="n-out" role="status" style="margin-top:8px;font-size:14px"></div></form></div>
 </div><div class="fb"><p>© <span id="yr"></span> CHẠM MÂY TRAVEL. All rights reserved.</p><p>Slow travel · Local culture · Meaningful memories</p></div></div></footer>
 
+<!-- Supabase JS v2 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Project URL: dùng URL gốc, không thêm /rest/v1/
+  const SUPABASE_URL = "https://jwnkzjhvffmzyemhxbrv.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_seam8UxeYM0NHxfSB58Cqg_njLOs5cD";
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+</script>
+
 <script>
 const CONTACT={email:"[email — cần bổ sung]",tel:"[số điện thoại — cần bổ sung]",addr:"[địa chỉ — cần bổ sung]",fb:"[fanpage — cần bổ sung]"};
 /* Dán link ảnh thật vào đây theo mã địa điểm, ví dụ IMG["dai-noi"]="https://.../dai-noi.jpg". Để trống thì dùng hình minh họa tạm. */
@@ -604,14 +616,59 @@ if(!n||n<1){o.textContent="Hãy nhập số khách (ít nhất 1 người).";ret
 const r=COMBOS.filter(c=>!g||c.tag===g);
 o.innerHTML=r.length?`Có ${r.length} hành trình phù hợp cho ${n} khách: ${r.map(c=>`<a href="#/tour/${c.id}">${c.n} (${rng(c.p[0],c.p[1])})</a>`).join(", ")}. Ngày khởi hành và giá được xác nhận khi tư vấn.`:"Chưa có hành trình phù hợp. Thử chọn loại trải nghiệm khác."};
 
-/* Biểu mẫu (chế độ demo) */
-$("#cf-form").onsubmit=e=>{e.preventDefault();let ok=true;const v=(id,er,cond,m)=>{const bad=!cond($(id).value.trim());$(er).textContent=bad?m:"";if(bad)ok=false};
-v("#c-name","#e-name",s=>s.length>1,"Hãy nhập họ và tên.");v("#c-mail","#e-mail",s=>/^\S+@\S+\.\S+$/.test(s),"Email chưa đúng, ví dụ ten@example.com.");
-v("#c-tel","#e-tel",s=>!s||/^[0-9+\s().-]{8,15}$/.test(s),"Số điện thoại cần 8–15 chữ số.");v("#c-msg","#e-msg",s=>s.length>=5,"Hãy cho chúng mình biết bạn cần tư vấn gì.");
-const o=$("#c-out");if(!ok){o.innerHTML='<div class="msg">Vui lòng sửa các mục báo lỗi ở trên.</div>';return}
-const bk=$("#c-type").value==="book";const sm="Họ tên: "+$("#c-name").value.trim()+" | Email: "+$("#c-mail").value.trim()+" | Combo: "+$("#c-combo").selectedOptions[0].text+" | Ngày dự kiến: "+($("#c-date").value||"chưa chọn")+" | Số khách: "+($("#c-n").value||"?")+" | Chi phí sẽ báo khi tư vấn.";
-const demo='<div class="msg"><b>Chế độ demo:</b> yêu cầu chưa được gửi tới máy chủ nên Chạm Mây chưa nhận được.'+(bk?' Đây chỉ là yêu cầu đặt tour, chưa phải xác nhận đặt chỗ.':'')+' Cần kết nối API trước khi dùng thật.</div>';
-if(bk){o.innerHTML='<div class="msg"><b>Rà soát trước khi gửi</b><p id="rv"></p><button class="btn" type="button" id="c-ok">Xác nhận gửi</button></div>';$("#rv").textContent=sm;$("#c-ok").onclick=()=>{o.innerHTML=demo}}else o.innerHTML=demo};
+/* Gửi yêu cầu tư vấn/đặt tour lên Supabase */
+async function saveContactRequest(button){
+  const o=$("#c-out");
+  const bk=$("#c-type").value==="book";
+  const comboText=$("#c-combo").selectedOptions[0]?.textContent || "Chưa chọn combo";
+  const requestNote=[
+    "Loại yêu cầu: "+(bk?"Yêu cầu đặt tour":"Xin tư vấn"),
+    "Ngày dự kiến: "+($("#c-date").value||"Chưa chọn"),
+    "Nội dung: "+$("#c-msg").value.trim(),
+    "Chi phí sẽ được xác nhận khi tư vấn."
+  ].join("\n");
+  button.disabled=true;
+  const oldText=button.textContent;
+  button.textContent="Đang gửi...";
+  o.innerHTML='<div class="msg">Đang gửi yêu cầu của bạn...</div>';
+  try{
+    const {error}=await supabaseClient.from("tour_bookings").insert([{
+      full_name:$("#c-name").value.trim(),
+      phone:$("#c-tel").value.trim() || null,
+      email:$("#c-mail").value.trim(),
+      tour_name:comboText==="Chưa chọn combo"?(bk?"Yêu cầu đặt tour":"Yêu cầu tư vấn"):comboText,
+      travel_date:$("#c-date").value || null,
+      guests:Math.max(1,Math.min(30,Math.floor(Number($("#c-n").value)||1))),
+      note:requestNote
+    }]);
+    if(error) throw error;
+    o.innerHTML='<div class="msg"><b>Đã gửi yêu cầu thành công.</b><p>'+(bk?'Đây là yêu cầu đặt tour, chưa phải xác nhận đặt chỗ.':'Chạm Mây đã nhận được yêu cầu tư vấn của bạn.')+' Chúng mình sẽ liên hệ để xác nhận thông tin.</p></div>';
+    $("#cf-form").reset();
+  }catch(err){
+    console.error("Supabase insert error:",err);
+    o.innerHTML='<div class="msg"><b>Chưa gửi được yêu cầu.</b><p>Hãy thử lại sau. Nếu lỗi tiếp tục xảy ra, cần kiểm tra tên cột của bảng tour_bookings và chính sách RLS cho phép INSERT.</p></div>';
+  }finally{
+    button.disabled=false;
+    button.textContent=oldText;
+  }
+}
+$("#cf-form").onsubmit=e=>{
+  e.preventDefault();let ok=true;
+  const v=(id,er,cond,m)=>{const bad=!cond($(id).value.trim());$(er).textContent=bad?m:"";if(bad)ok=false};
+  v("#c-name","#e-name",s=>s.length>1,"Hãy nhập họ và tên.");
+  v("#c-mail","#e-mail",s=>/^\S+@\S+\.\S+$/.test(s),"Email chưa đúng, ví dụ ten@example.com.");
+  v("#c-tel","#e-tel",s=>!s||/^[0-9+\s().-]{8,15}$/.test(s),"Số điện thoại cần 8–15 chữ số.");
+  v("#c-msg","#e-msg",s=>s.length>=5,"Hãy cho chúng mình biết bạn cần tư vấn gì.");
+  const o=$("#c-out");if(!ok){o.innerHTML='<div class="msg">Vui lòng sửa các mục báo lỗi ở trên.</div>';return}
+  const bk=$("#c-type").value==="book";
+  if(bk){
+    o.innerHTML='<div class="msg"><b>Rà soát trước khi gửi</b><p id="rv"></p><button class="btn" type="button" id="c-ok">Xác nhận gửi</button></div>';
+    $("#rv").textContent="Họ tên: "+$("#c-name").value.trim()+" | Email: "+$("#c-mail").value.trim()+" | Combo: "+($("#c-combo").selectedOptions[0]?.textContent||"Chưa chọn combo")+" | Ngày dự kiến: "+($("#c-date").value||"chưa chọn")+" | Số khách: "+($("#c-n").value||"2");
+    $("#c-ok").onclick=()=>saveContactRequest($("#c-ok"));
+  }else{
+    saveContactRequest($("#cf-form").querySelector('button[type="submit"]'));
+  }
+};
 $("#news").onsubmit=e=>{e.preventDefault();$("#n-out").textContent=/^\S+@\S+\.\S+$/.test($("#n-mail").value.trim())?"Chế độ demo: email chưa được lưu.":"Email chưa đúng định dạng."};
 
 /* Tìm kiếm, thư viện ảnh, đánh giá */
