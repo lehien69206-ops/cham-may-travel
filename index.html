@@ -161,6 +161,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-
 .est .er{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:15px}.est .er span:last-child{font-variant-numeric:tabular-nums;text-align:right}
 .est .er.t{border:0;border-top:2px solid var(--tx);margin-top:8px;padding-top:12px;font-weight:700;font-size:1.1rem;color:var(--ac2)}
 .tools{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.dur{margin:0;font:600 1.1rem/1.5 "Be Vietnam Pro",system-ui,sans-serif;color:var(--tx)}
 
 /* Chi tiết địa điểm / chính sách */
 .pd{padding:clamp(110px,13vw,140px) 0 clamp(50px,7vw,80px)}
@@ -281,7 +282,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <p class="note rv">Giá là giá dự kiến mỗi khách, tính theo hai khách một phòng. Giá và lịch vận hành được xác nhận khi tư vấn.</p>
 <div id="combos"></div><div id="cnone" class="msg" hidden>Không có combo phù hợp. <button class="btn ghost dk" id="cclear" style="padding:6px 16px">Xóa bộ lọc</button></div>
 </div></section>
-<section style="background:var(--card)"><div class="wrap"><div class="shead rv"><h2>Giá dự kiến gồm những gì?</h2><p>Bảng dự toán cho mỗi khách tham gia hành trình 3 ngày 2 đêm. Mức giá mỗi combo nằm trong khoảng này.</p></div><div class="ctab rv" id="ctab"></div><p class="note rv" style="margin-top:14px">Đây là dự toán tham khảo, chưa phải báo giá chính thức. Chi phí đi đến và rời Huế không nằm trong dự toán.</p></div></section>
+
 </div>
 
 <!-- DU LỊCH CÁ NHÂN -->
@@ -289,7 +290,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <div class="pagehead"><div class="wrap"><h1>Tự viết hành trình của bạn</h1><p>Chọn những điều bạn muốn trải nghiệm, giá ước tính sẽ hiện ra sau khi bạn chọn hoạt động. Hành trình này vẫn có thể được viết lại.</p></div></div>
 <section><div class="wrap">
 <form id="planner-form">
-<fieldset class="rv"><legend>Thời lượng</legend><p style="margin:0"><b>3 ngày 2 đêm</b> tại Huế</p><input type="hidden" id="p-days" value="3"></fieldset>
+<fieldset class="rv"><legend>Thời lượng</legend><p class="dur">3 ngày 2 đêm tại Huế</p><input type="hidden" id="p-days" value="3"></fieldset>
 <fieldset class="rv"><legend>Chọn hoạt động</legend><div id="acts"></div></fieldset>
 <fieldset class="rv"><legend>Về chuyến đi</legend><div class="row">
 <label class="f">Ngày bắt đầu<input type="date" id="p-date"></label>
@@ -551,11 +552,10 @@ $("#places").innerHTML=PLACES.map(placeCard).join("");
 $("#flip-f").innerHTML=scene("games",1);
 $("#about-art").innerHTML=scene("farm",2);
 $("#flip").onclick=e=>{const b=e.currentTarget;const o=b.classList.toggle("on");b.setAttribute("aria-pressed",o)};
-$("#ctab").innerHTML='<div class="cr hd"><span>Nội dung dự kiến</span><span>Mô tả</span><span>Chi phí (VNĐ)</span></div>'+COST.map(r=>`<div class="cr"><span><b>${r[0]}</b></span><span>${r[1]}</span><span>${num(r[2]*1000)} – ${num(r[3]*1000)}</span></div>`).join("")+`<div class="cr tt"><span>Tổng dự toán</span><span>Khoảng chi phí dự kiến cho mỗi cá nhân tham gia hành trình</span><span>${num(COST.reduce((s,r)=>s+r[2],0)*1000)} – ${num(COST.reduce((s,r)=>s+r[3],0)*1000)}</span></div>`;
 
 /* Trang Tour */
 let cf="",openId="";
-function comboFull(c,i){return `<article class="cbx ${i%2?"rev":""}" id="cb-${c.id}"><div class="cmedia tilt" data-t="6">${scene(c.sc,i)}</div><div><span class="pill">Combo ${COMBOS.indexOf(c)+1}</span><h3>${c.n}</h3><p style="margin-bottom:4px">${c.t}</p><p class="hlx">Hoạt động nổi bật: ${c.hl}</p><div class="big"><span class="plab">Giá ước tính</span>${rng(c.p[0],c.p[1])}/người</div><details class="cdet"${openId===c.id?" open":""}><summary>Xem chi tiết lịch trình 3 ngày 2 đêm</summary><div>${c.days.map((d,k)=>`<details class="dd" open><summary>Ngày ${k+1} – ${d.t}</summary><div class="db"><ul class="dl">${d.a.map(x=>`<li>${x}</li>`).join("")}</ul></div></details>`).join("")}<p class="cnote">${CNOTE}</p></div></details></div><div class="btns" style="margin-top:16px"><button class="btn use" data-c="${c.id}">Dùng làm lịch trình của tôi</button><a class="btn" href="#/lien-he" data-ask="${c.id}" data-type="book">Đặt tour</a><a class="btn ghost dk" href="#/lien-he" data-ask="${c.id}">Hỏi tư vấn</a></div></div></article>`}
+function comboFull(c,i){return `<article class="cbx ${i%2?"rev":""}" id="cb-${c.id}"><div class="cmedia tilt" data-t="6">${scene(c.sc,i)}</div><div><span class="pill">Combo ${COMBOS.indexOf(c)+1}</span><h3>${c.n}</h3><p style="margin-bottom:4px">${c.t}</p><p class="hlx">Hoạt động nổi bật: ${c.hl}</p><div class="big">${rng(c.p[0],c.p[1])}/người</div><div>${c.days.map((d,k)=>`<details class="dd"${k===0||openId===c.id?" open":""}><summary>Ngày ${k+1} – ${d.t}</summary><div class="db"><ul class="dl">${d.a.map(x=>`<li>${x}</li>`).join("")}</ul><div class="chips">${d.ids.map(x=>`<span class="chip">${byId[x].n}</span>`).join("")}</div></div></details>`).join("")}<p class="cnote">${CNOTE}</p></div><div class="btns" style="margin-top:16px"><button class="btn use" data-c="${c.id}">Dùng làm lịch trình của tôi</button><a class="btn" href="#/lien-he" data-ask="${c.id}" data-type="book">Đặt tour</a><a class="btn ghost dk" href="#/lien-he" data-ask="${c.id}">Hỏi tư vấn</a></div></div></article>`}
 function renderCombos(){const l=COMBOS.filter(c=>!cf||c.tag===cf);$("#combos").innerHTML=l.map((c,i)=>comboFull(c,COMBOS.indexOf(c))).join("");$("#cnone").hidden=l.length>0;$$("#combos .cbx").forEach(e=>e.classList.add("rv"));rvScan($('.view[data-v="/tour"]'))}
 $("#cf").innerHTML=[["","Tất cả"],...Object.entries(TAGS)].map(([v,l])=>`<button type="button" data-v="${v}" aria-pressed="${v===cf}">${l}</button>`).join("");
 $("#cf").onclick=e=>{const b=e.target.closest("button");if(!b)return;cf=b.dataset.v;$$("#cf button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderCombos()};
