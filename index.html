@@ -335,7 +335,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <label class="f">Loại yêu cầu<select id="c-type"><option value="ask">Xin tư vấn</option><option value="book">Yêu cầu đặt tour</option></select></label><div class="row"><label class="f">Ngày dự kiến<input type="date" id="c-date"></label><label class="f">Số khách<input type="number" id="c-n" min="1" max="30" value="2"></label></div><label class="f">Combo quan tâm<select id="c-combo"></select></label>
 <label class="f">Nội dung cần tư vấn<textarea id="c-msg" rows="6"></textarea><span class="err" id="e-msg"></span></label>
 <button class="btn" type="submit">Gửi yêu cầu tư vấn</button><div id="c-out" role="status"></div></form>
-<div class="rv"><h2>Thông tin liên hệ</h2><p class="note">Chưa có thông tin thật. Cần bổ sung vào biến CONTACT trong mã nguồn.</p>
+<div class="rv"><h2>Thông tin liên hệ</h2><p class="note">Thông tin liên hệ chính thức sẽ được cập nhật tại cấu hình website.</p>
 <p>Email: <span id="ct-mail"></span><br>Điện thoại: <span id="ct-tel"></span><br>Địa chỉ: <span id="ct-addr"></span><br>Facebook: <span id="ct-fb"></span></p></div></div></section></div>
 </main>
 
@@ -509,12 +509,12 @@ const pCombos=p=>COMBOS.filter(c=>c.days.some(d=>d.ids.some(i=>p.a.includes(i)))
 /* Chính sách */
 const POLS=[
 {s:"bao-mat",n:"Chính sách bảo mật",i:"Cách Chạm Mây thu thập, sử dụng và bảo vệ thông tin của bạn.",c:[
-["Thông tin chúng mình thu thập","Khi bạn điền biểu mẫu liên hệ, đặt tour hoặc đăng ký nhận tin, chúng mình có thể nhận họ tên, email, số điện thoại (không bắt buộc), ngày dự kiến, số khách và nội dung bạn viết. Lịch trình bạn tự thiết kế được lưu tạm ngay trong trình duyệt của bạn, không gửi lên máy chủ."],
+["Thông tin chúng mình thu thập","Khi bạn điền biểu mẫu liên hệ, đặt tour hoặc đăng ký nhận tin, chúng mình có thể nhận họ tên, email, số điện thoại (không bắt buộc), ngày dự kiến, số khách và nội dung bạn viết. Lịch trình bạn tự thiết kế được tạo trong trình duyệt; khi gửi yêu cầu tư vấn, nội dung lịch trình sẽ được gửi cùng biểu mẫu liên hệ."],
 ["Mục đích sử dụng","Thông tin chỉ dùng để tư vấn hành trình, xác nhận yêu cầu, liên hệ với bạn và cải thiện nội dung website. Chúng mình chỉ gửi tin khuyến mại khi bạn đã đăng ký nhận tin."],
 ["Chia sẻ thông tin","Chúng mình không bán thông tin cá nhân. Thông tin chỉ được chia sẻ với đơn vị thực hiện chuyến đi như nơi lưu trú, xe đưa đón hoặc người dân tham gia chương trình, ở mức cần thiết và sau khi bạn đồng ý đặt tour."],
 ["Lưu trữ và bảo mật","Thông tin được lưu trong thời gian cần thiết để phục vụ tư vấn và vận hành chuyến đi, cùng các biện pháp bảo vệ hợp lý. Không có hệ thống nào an toàn tuyệt đối, vì vậy hãy thận trọng khi chia sẻ thông tin nhạy cảm."],
 ["Quyền của bạn","Bạn có quyền yêu cầu xem, chỉnh sửa hoặc xóa thông tin đã gửi, và rút lại đồng ý nhận tin bất cứ lúc nào. Hãy liên hệ qua trang Liên hệ."],
-["Trạng thái hiện tại của website","Các biểu mẫu trên bản website này đang ở chế độ demo, chưa gửi dữ liệu lên máy chủ. Chính sách trên sẽ áp dụng đầy đủ khi biểu mẫu được kết nối chính thức."]]},
+["Gửi biểu mẫu và lưu trữ","Yêu cầu tư vấn/đặt tour được gửi đến hệ thống khi bạn xác nhận gửi thành công. Đăng ký nhận tin và đánh giá được lưu theo các bảng dữ liệu tương ứng. Lịch trình cá nhân được tạo tại trình duyệt; chỉ được gửi đến Chạm Mây khi bạn chủ động gửi yêu cầu tư vấn."]]},
 {s:"dieu-khoan",n:"Điều khoản sử dụng",i:"Những quy định khi bạn sử dụng website Chạm Mây Travel.",c:[
 ["Phạm vi áp dụng","Điều khoản này áp dụng cho việc truy cập và sử dụng website, các công cụ tự thiết kế lịch trình và biểu mẫu trên website."],
 ["Nội dung và hình ảnh","Nội dung giới thiệu hành trình mang tính tham khảo. Một số hình ảnh hiện là hình minh họa tạm và sẽ được thay bằng ảnh thật. Chương trình thực tế có thể điều chỉnh theo thời tiết, mùa vụ và điều kiện địa phương."],
@@ -594,7 +594,7 @@ const used=new Set(plan.flat());const free=A.filter(a=>!used.has(a.id));const n=
 box.innerHTML=`<h2 style="margin-top:40px">Hành trình của bạn</h2>`+(over.length?`<div class="msg">Không đủ chỗ cho: ${over.map(i=>byId[i].n).join(", ")}. Hãy tăng số ngày hoặc chọn nhịp độ năng động hơn.</div>`:"")+plan.map((d,di)=>{const s=sched(d);const end=s.length?s[s.length-1].e:0;return `<div class="day"><h3>Ngày ${di+1}${end?` (khoảng ${fmt(8)}–${fmt(end)})`:""}</h3>${end>18.5?`<div class="msg">Ngày này kết thúc sau 18:30. Nên bỏ bớt một hoạt động.</div>`:""}<ol>${s.length?s.map((x,k)=>x.l?`<li class="item lunch"><span class="tm">${fmt(x.s)}</span><span>Nghỉ trưa và di chuyển</span><span></span><span></span></li>`:`<li class="item" style="animation-delay:${k*.05}s"><span class="tm">${fmt(x.s)}–${fmt(x.e)}</span><span>${x.a.n}<small style="display:block;color:var(--sub)">${GROUPS[x.a.g]}</small></span><span class="pr">${aprice(x.a)}</span><span><button data-do="up" data-d="${di}" data-i="${d.indexOf(x.a.id)}" aria-label="Chuyển lên">↑</button> <button data-do="dn" data-d="${di}" data-i="${d.indexOf(x.a.id)}" aria-label="Chuyển xuống">↓</button> <button data-do="rm" data-d="${di}" data-i="${d.indexOf(x.a.id)}" aria-label="Xóa ${x.a.n}">✕</button></span></li>`).join(""):`<li class="item"><span></span><span>Ngày tự do để nghỉ ngơi.</span><span></span><span></span></li>`}</ol></div>`}).join("")+
 (plan.flat().length?`<div class="est"><h3>Giá ước tính cho mỗi khách</h3>${estRows(E,n)}</div>`:"")+
 (free.length?`<div class="row tools" style="align-items:flex-end"><label class="f">Thêm hoạt động<select id="add-a">${free.map(a=>`<option value="${a.id}">${a.n}</option>`).join("")}</select></label><label class="f">Vào ngày<select id="add-d">${plan.map((_,i)=>`<option value="${i}">Ngày ${i+1}</option>`).join("")}</select></label><button class="btn ghost dk" id="add-b" type="button">Thêm</button></div>`:"")+
-`<div class="tools"><button class="btn" id="ask" type="button">Gửi yêu cầu tư vấn chuyến đi</button><button class="btn ghost dk" id="redo" type="button">Chỉnh lại lựa chọn</button><button class="btn ghost dk" id="prt" type="button">In lịch trình</button></div><p class="note">Lịch trình được lưu tạm trong trình duyệt này, chưa lưu trên máy chủ. Thời gian chỉ là ước tính, chưa phải lịch vận hành chính thức.</p>`}
+`<div class="tools"><button class="btn" id="ask" type="button">Gửi yêu cầu tư vấn chuyến đi</button><button class="btn ghost dk" id="redo" type="button">Chỉnh lại lựa chọn</button><button class="btn ghost dk" id="prt" type="button">In lịch trình</button></div><p class="note">Lịch trình được tạo trong trình duyệt. Khi chọn “Gửi yêu cầu tư vấn chuyến đi”, lịch trình sẽ được đưa vào biểu mẫu để bạn kiểm tra và chủ động gửi cho Chạm Mây. Thời gian chỉ là ước tính, chưa phải lịch vận hành chính thức.</p>`}
 function generate(ids,n,budget){if(!ids.length){$("#pmsg").innerHTML='<div class="msg">Hãy chọn ít nhất một hoạt động.</div>';return}
 $("#pmsg").innerHTML="";plan=Array.from({length:n},()=>[]);over=[];const u=Array(n).fill(0);
 ids.forEach(id=>{const h=byId[id].h,d=u.findIndex(x=>x+h<=budget);if(d<0)over.push(id);else{plan[d].push(id);u[d]+=h}});save();renderPlan();$("#plan").scrollIntoView({behavior:"smooth"})}
@@ -669,7 +669,14 @@ $("#cf-form").onsubmit=e=>{
     saveContactRequest($("#cf-form").querySelector('button[type="submit"]'));
   }
 };
-$("#news").onsubmit=e=>{e.preventDefault();$("#n-out").textContent=/^\S+@\S+\.\S+$/.test($("#n-mail").value.trim())?"Chế độ demo: email chưa được lưu.":"Email chưa đúng định dạng."};
+$("#news").onsubmit=async e=>{
+ e.preventDefault();const email=$("#n-mail").value.trim().toLowerCase(),o=$("#n-out"),btn=e.submitter||$("#news button[type=submit]");
+ if(!/^\S+@\S+\.\S+$/.test(email)){o.textContent="Email chưa đúng định dạng.";return}
+ const old=btn.textContent;btn.disabled=true;btn.textContent="Đang đăng ký...";o.textContent="Đang lưu đăng ký nhận tin...";
+ try{const {error}=await supabaseClient.from("newsletter_subscribers").upsert([{email}],{onConflict:"email",ignoreDuplicates:true});if(error)throw error;o.textContent="Đăng ký nhận tin thành công.";$("#news").reset()}
+ catch(err){console.error("Newsletter save error:",err);o.textContent="Chưa đăng ký được. Hãy thử lại sau; nếu lỗi tiếp tục, cần chạy file SQL thiết lập Supabase mới."}
+ finally{btn.disabled=false;btn.textContent=old}
+};
 
 /* Tìm kiếm, thư viện ảnh, đánh giá */
 const nz=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").toLowerCase();
@@ -683,15 +690,20 @@ function showG(){$("#lb-i").innerHTML=scene(GAL[gi][1],gi);$("#lb-c").textConten
 $("#gal").onclick=e=>{const b=e.target.closest(".gt");if(b){gi=+b.dataset.i;showG();lb.showModal()}};
 $("#lb-p").onclick=()=>{gi=(gi+GAL.length-1)%GAL.length;showG()};$("#lb-n").onclick=()=>{gi=(gi+1)%GAL.length;showG()};$("#lb-x").onclick=()=>lb.close();
 lb.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")$("#lb-p").click();if(e.key==="ArrowRight")$("#lb-n").click()});
-const RV=[];$("#rf-c").innerHTML='<option value="">Tất cả combo</option>'+cOpts;$("#r-combo").innerHTML='<option value="">Chưa chọn</option>'+cOpts;
-function renderRv(){const c=$("#rf-c").value,s=+$("#rf-s").value,o=$("#rv-list");o.innerHTML="";if(!RV.length){o.innerHTML='<div class="msg">Chưa có đánh giá thật. Điểm tổng hợp và phân bố sao sẽ hiển thị khi có dữ liệu.</div>';return}
+let RV=[];$("#rf-c").innerHTML='<option value="">Tất cả combo</option>'+cOpts;$("#r-combo").innerHTML='<option value="">Chưa chọn</option>'+cOpts;
+function renderRv(){const c=$("#rf-c").value,s=+$("#rf-s").value,o=$("#rv-list");o.innerHTML="";if(!RV.length){o.innerHTML='<div class="msg">Chưa có đánh giá được duyệt. Sau khi gửi, đánh giá sẽ được xem xét trước khi hiển thị.</div>';return}
 const l=RV.filter(r=>(!c||r.c===c)&&(!s||r.s===s));if(!l.length){o.innerHTML='<div class="msg">Không có đánh giá khớp bộ lọc.</div>';return}
-l.forEach(r=>{const d=document.createElement("article");d.className="day";const h=document.createElement("h3");h.textContent=r.n+" — "+"★".repeat(r.s)+"☆".repeat(5-r.s);const p=document.createElement("p");p.textContent=r.t;const k=document.createElement("p");k.className="note";k.textContent=((COMBOS.find(x=>x.id===r.c)||{n:"Chưa chọn tour"}).n)+" · Bản demo, chưa lưu trên máy chủ";d.append(h,p,k);o.append(d)})}
-$("#rf-c").onchange=$("#rf-s").onchange=renderRv;
-$("#rv-form").onsubmit=e=>{e.preventDefault();let ok=true;const chk=(er,bad,m)=>{$(er).textContent=bad?m:"";if(bad)ok=false};
+l.forEach(r=>{const d=document.createElement("article");d.className="day";const h=document.createElement("h3");h.textContent=r.n+" — "+"★".repeat(r.s)+"☆".repeat(5-r.s);const p=document.createElement("p");p.textContent=r.t;const k=document.createElement("p");k.className="note";k.textContent=((COMBOS.find(x=>x.id===r.c)||{n:"Chạm Mây Travel"}).n);d.append(h,p,k);o.append(d)})}
+async function loadReviews(){const o=$("#rv-list");o.innerHTML='<div class="msg">Đang tải đánh giá...</div>';try{const {data,error}=await supabaseClient.from("tour_reviews").select("id,display_name,combo_id,rating,content,created_at").eq("approved",true).order("created_at",{ascending:false}).limit(100);if(error)throw error;RV=(data||[]).map(r=>({n:r.display_name,c:r.combo_id,s:r.rating,t:r.content}));renderRv()}catch(err){console.error("Review load error:",err);o.innerHTML='<div class="msg">Chưa tải được đánh giá. Kiểm tra bảng tour_reviews và chính sách truy cập trong Supabase.</div>'}}
+$("#rf-c").onchange=$("#rf-s").onchange=renderRv;loadReviews();
+$("#rv-form").onsubmit=async e=>{e.preventDefault();let ok=true;const chk=(er,bad,m)=>{$(er).textContent=bad?m:"";if(bad)ok=false};
 chk("#re-name",$("#r-name").value.trim().length<2,"Hãy nhập tên hiển thị.");chk("#re-star",!$("#r-star").value,"Hãy chọn số sao.");chk("#re-text",$("#r-text").value.trim().length<10,"Nội dung cần ít nhất 10 ký tự.");chk("#re-ok",!$("#r-ok").checked,"Bạn cần đồng ý để gửi.");
-const o=$("#r-out");if(!ok){o.innerHTML='<div class="msg">Vui lòng sửa các mục báo lỗi.</div>';return}
-RV.unshift({n:$("#r-name").value.trim(),c:$("#r-combo").value,s:+$("#r-star").value,t:$("#r-text").value.trim()});o.innerHTML='<div class="msg"><b>Chế độ demo:</b> đánh giá chưa được lưu trên máy chủ và chưa đăng công khai; chỉ hiện trong phiên này.</div>';e.target.reset();renderRv()};
+const o=$("#r-out"),btn=e.submitter||$("#rv-form button[type=submit]");if(!ok){o.innerHTML='<div class="msg">Vui lòng sửa các mục báo lỗi.</div>';return}if(!$("#r-combo").value){o.innerHTML='<div class="msg">Hãy chọn tour đã tham gia.</div>';return}
+const old=btn.textContent;btn.disabled=true;btn.textContent="Đang gửi...";
+try{const {error}=await supabaseClient.from("tour_reviews").insert([{display_name:$("#r-name").value.trim(),combo_id:$("#r-combo").value,rating:Number($("#r-star").value),content:$("#r-text").value.trim(),approved:false}]);if(error)throw error;o.innerHTML='<div class="msg"><b>Đã gửi đánh giá.</b><p>Nội dung đang chờ Chạm Mây xem xét trước khi hiển thị công khai.</p></div>';e.target.reset()}
+catch(err){console.error("Review submit error:",err);o.innerHTML='<div class="msg">Chưa gửi được đánh giá. Kiểm tra bảng tour_reviews và chính sách INSERT trong Supabase.</div>'}
+finally{btn.disabled=false;btn.textContent=old}
+};
 
 /* Trang con: địa điểm & chính sách */
 function renderPlace(s){const p=pById[s],i=PLACES.indexOf(p),acts=pAct(p),lo=acts.reduce((t,a)=>t+a.lo,0),hi=acts.reduce((t,a)=>t+a.hi,0),h=acts.reduce((t,a)=>t+a.h,0),cb=pCombos(p),pv=PLACES[(i+PLACES.length-1)%PLACES.length],nx=PLACES[(i+1)%PLACES.length];
