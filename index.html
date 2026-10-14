@@ -673,8 +673,8 @@ $("#news").onsubmit=async e=>{
  e.preventDefault();const email=$("#n-mail").value.trim().toLowerCase(),o=$("#n-out"),btn=e.submitter||$("#news button[type=submit]");
  if(!/^\S+@\S+\.\S+$/.test(email)){o.textContent="Email chưa đúng định dạng.";return}
  const old=btn.textContent;btn.disabled=true;btn.textContent="Đang đăng ký...";o.textContent="Đang lưu đăng ký nhận tin...";
- try{const {error}=await supabaseClient.from("newsletter_subscribers").upsert([{email}],{onConflict:"email",ignoreDuplicates:true});if(error)throw error;o.textContent="Đăng ký nhận tin thành công.";$("#news").reset()}
- catch(err){console.error("Newsletter save error:",err);o.textContent="Chưa đăng ký được. Hãy thử lại sau; nếu lỗi tiếp tục, cần chạy file SQL thiết lập Supabase mới."}
+ try{const {error}=await supabaseClient.from("newsletter_subscribers").insert([{email}]);if(error){if(error.code==="23505"){o.textContent="Email này đã đăng ký nhận tin trước đó.";return}throw error}o.textContent="Đăng ký nhận tin thành công.";$("#news").reset()}
+ catch(err){console.error("Newsletter save error:",err);o.textContent="Chưa đăng ký được: "+(err?.message||"lỗi kết nối");}
  finally{btn.disabled=false;btn.textContent=old}
 };
 
