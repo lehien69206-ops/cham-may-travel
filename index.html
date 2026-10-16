@@ -78,7 +78,7 @@ nav.open{clip-path:inset(0 0 -40px 0);opacity:1;pointer-events:auto}nav a.nl{pad
 
 /* Hero */
 .hero{min-height:100svh;position:relative;display:flex;align-items:flex-end;color:var(--on);background:var(--hill3);overflow:hidden;padding:0}
-.hero svg{position:absolute;inset:0;width:100%;height:100%}.ly{transition:transform .35s ease-out}
+.hero .countryside-image{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:hidden;background:var(--hill3)}.hero .countryside-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}.hero svg{position:absolute;inset:0;width:100%;height:100%}.ly{transition:transform .35s ease-out}
 .kite{animation:sway 7s ease-in-out infinite;transform-origin:300px 520px}
 @keyframes sway{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3.5deg) translateY(-14px)}}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,18,7,.6) 0,rgba(31,18,7,0) 24%,rgba(31,18,7,0) 42%,rgba(31,18,7,.72) 100%);pointer-events:none}
@@ -218,14 +218,14 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <!-- TRANG CHỦ -->
 <div class="view" data-v="/">
 <section class="hero" id="hero" aria-label="Giới thiệu">
-<svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Minh họa đồng quê Huế lúc chiều, có con diều trên trời (ảnh minh họa tạm, thay bằng ảnh thật)">
-<rect x="-200" y="-200" width="1600" height="1100" fill="var(--sky)"/>
-<g class="ly" data-k="40"><circle cx="880" cy="250" r="90" fill="#C98A4B" opacity=".85"/></g>
-<g class="ly" data-k="60"><path d="M-150 430C200 360 340 400 520 380S900 330 1350 400V900H-150Z" fill="var(--hill1)"/></g>
-<g class="ly" data-k="95"><path d="M-150 520C250 450 450 520 700 480S1050 440 1350 490V900H-150Z" fill="var(--hill2)"/><path d="M830 478l42-28 42 28z" fill="var(--hill3)"/><rect x="840" y="478" width="64" height="22" fill="var(--hill3)"/></g>
-<g class="ly" data-k="150"><g class="kite"><g transform="translate(300 170) rotate(-18)"><path d="M0 -56L36 0L0 68L-36 0Z" fill="#8C3D0F"/><path d="M0 -56V68M-36 0H36" stroke="#F2EBDF" stroke-width="2"/></g><path d="M292 232C250 330 330 380 285 520" stroke="#F2EBDF" stroke-width="2" fill="none" opacity=".75"/></g></g>
-<g class="ly" data-k="190"><path d="M-150 610C300 560 600 620 900 580S1100 570 1350 590V900H-150Z" fill="var(--hill3)"/></g>
-</svg>
+<div class="countryside-image">
+    <img
+        src="./images/dong-que-hue.jpg"
+        alt="Khung cảnh đồng quê Huế lúc chiều với cánh đồng và cánh diều"
+        loading="eager"
+        fetchpriority="high"
+    >
+</div>
 <div class="wrap go">
 <h1>Có những miền ký ức, chỉ cần một chuyến đi để trở về.</h1>
 <p>Cùng Chạm Mây khám phá Huế theo một cách khác — chậm hơn, sâu hơn và gần gũi hơn với những điều bình dị làm nên tuổi thơ.</p>
@@ -576,7 +576,7 @@ let plan=null,over=[];
 function save(){try{localStorage.setItem("cm_plan",JSON.stringify(plan))}catch(e){}}
 try{const s=JSON.parse(localStorage.getItem("cm_plan")||"null");if(Array.isArray(s)&&s.every(d=>Array.isArray(d)&&d.every(i=>byId[i])))plan=s}catch(e){}
 if(plan)plan.flat().forEach(i=>{const c=$(`.act[value="${i}"]`);if(c)c.checked=true});
-$("#acts").addEventListener("change",renderLive);$("#p-n").addEventListener("input",renderLive);renderLive();
+$("#acts").addEventListener("change",renderLive);$("#p-n").addEventListener("input",renderLive);
 function sched(ids){let t=8,l=false,o=[];for(const id of ids){if(!l&&t>=11){const s=Math.max(t,11.5);o.push({l:1,s,e:s+1.5});t=s+1.5;l=true}const a=byId[id];o.push({a,s:t,e:t+a.h});t+=a.h+.5}return o}
 function estimate(pl){return estimateIds(pl.flat(),pl.length)}
 function estimateIds(ids,days){const nights=Math.max(days-1,0);let lo=0,hi=0;ids.forEach(i=>{lo+=byId[i].lo;hi+=byId[i].hi});
@@ -589,6 +589,7 @@ if(!ids.length){box.hidden=true;box.classList.remove("show");box.innerHTML="";re
 const n=Math.max(1,Math.min(30,Math.floor(+$("#p-n").value)||1)),was=box.hidden;
 box.innerHTML=`<h3>Giá ước tính cho hoạt động bạn đã chọn</h3><p class="ps">Tự cập nhật khi bạn chọn hoặc bỏ chọn hoạt động, tính theo 3 ngày 2 đêm.</p>`+estRows(estimateIds(ids,3),n,ids);
 box.hidden=false;if(was){box.classList.remove("show");void box.offsetWidth;box.classList.add("show")}}
+renderLive();
 function renderPlan(){const box=$("#plan");if(!plan){box.innerHTML="";return}
 const used=new Set(plan.flat());const free=A.filter(a=>!used.has(a.id));const n=Math.max(1,+$("#p-n").value||1);const E=estimate(plan);
 box.innerHTML=`<h2 style="margin-top:40px">Hành trình của bạn</h2>`+(over.length?`<div class="msg">Không đủ chỗ cho: ${over.map(i=>byId[i].n).join(", ")}. Hãy tăng số ngày hoặc chọn nhịp độ năng động hơn.</div>`:"")+plan.map((d,di)=>{const s=sched(d);const end=s.length?s[s.length-1].e:0;return `<div class="day"><h3>Ngày ${di+1}${end?` (khoảng ${fmt(8)}–${fmt(end)})`:""}</h3>${end>18.5?`<div class="msg">Ngày này kết thúc sau 18:30. Nên bỏ bớt một hoạt động.</div>`:""}<ol>${s.length?s.map((x,k)=>x.l?`<li class="item lunch"><span class="tm">${fmt(x.s)}</span><span>Nghỉ trưa và di chuyển</span><span></span><span></span></li>`:`<li class="item" style="animation-delay:${k*.05}s"><span class="tm">${fmt(x.s)}–${fmt(x.e)}</span><span>${x.a.n}<small style="display:block;color:var(--sub)">${GROUPS[x.a.g]}</small></span><span class="pr">${aprice(x.a)}</span><span><button data-do="up" data-d="${di}" data-i="${d.indexOf(x.a.id)}" aria-label="Chuyển lên">↑</button> <button data-do="dn" data-d="${di}" data-i="${d.indexOf(x.a.id)}" aria-label="Chuyển xuống">↓</button> <button data-do="rm" data-d="${di}" data-i="${d.indexOf(x.a.id)}" aria-label="Xóa ${x.a.n}">✕</button></span></li>`).join(""):`<li class="item"><span></span><span>Ngày tự do để nghỉ ngơi.</span><span></span><span></span></li>`}</ol></div>`}).join("")+
