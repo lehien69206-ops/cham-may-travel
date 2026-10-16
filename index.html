@@ -111,6 +111,7 @@ nav.open{clip-path:inset(0 0 -40px 0);opacity:1;pointer-events:auto}nav a.nl{pad
 .ff.back textarea{flex:1;min-height:0;resize:none;border:0;line-height:34px;font-size:1.25rem;background:repeating-linear-gradient(transparent 0 33px,var(--line) 33px 34px) 0 0/100% 34px local}
 .ff.back textarea,.ff.back textarea:focus{border:0!important;box-shadow:none!important;outline:0!important;padding:0;background-color:transparent}.ff.back .pc-in{border:0;border-bottom:1px solid var(--line);background:transparent;box-shadow:none;padding:2px 0;margin:0;border-radius:0}.ff.back .pc-in:focus{border-bottom-color:var(--ac);box-shadow:none}.ff.back .pc-from{text-align:right;width:60%;align-self:flex-end}
 .ff.back .st{align-self:flex-end;border:2px dashed var(--ac);color:var(--ac);padding:4px 10px;font-size:12px;border-radius:3px;transform:rotate(4deg)}
+.ff.back .pc-title{width:100%;box-sizing:border-box;border:0!important;border-bottom:1px dashed var(--line)!important;background:transparent;box-shadow:none;outline:0;padding:0 0 2px;margin:0;border-radius:0;font:700 1.5rem "Cormorant Garamond",serif;color:var(--ac2)}.ff.back .pc-title:focus{border-bottom-color:var(--ac)!important}
 .pc-wrap{display:flex;flex-direction:column;align-items:center;width:100%}
 .pc-tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px}
 .pc-tools .btn{padding:10px 18px;font-size:15px;cursor:pointer}.pc-up input{display:none}
@@ -229,14 +230,14 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <!-- TRANG CHỦ -->
 <div class="view" data-v="/">
 <section class="hero" id="hero" aria-label="Giới thiệu">
-<div class="countryside-image">
-    <img
-        src="./dong-que-hue.jpg"
-        alt="Khung cảnh đồng quê Huế lúc chiều với cánh đồng và cánh diều"
-        loading="eager"
-        fetchpriority="high"
-    >
-</div>
+<svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Minh họa đồng quê Huế lúc chiều, có con diều trên trời (ảnh minh họa tạm, thay bằng ảnh thật)">
+<rect x="-200" y="-200" width="1600" height="1100" fill="var(--sky)"/>
+<g class="ly" data-k="40"><circle cx="880" cy="250" r="90" fill="#C98A4B" opacity=".85"/></g>
+<g class="ly" data-k="60"><path d="M-150 430C200 360 340 400 520 380S900 330 1350 400V900H-150Z" fill="var(--hill1)"/></g>
+<g class="ly" data-k="95"><path d="M-150 520C250 450 450 520 700 480S1050 440 1350 490V900H-150Z" fill="var(--hill2)"/><path d="M830 478l42-28 42 28z" fill="var(--hill3)"/><rect x="840" y="478" width="64" height="22" fill="var(--hill3)"/></g>
+<g class="ly" data-k="150"><g class="kite"><g transform="translate(300 170) rotate(-18)"><path d="M0 -56L36 0L0 68L-36 0Z" fill="#8C3D0F"/><path d="M0 -56V68M-36 0H36" stroke="#F2EBDF" stroke-width="2"/></g><path d="M292 232C250 330 330 380 285 520" stroke="#F2EBDF" stroke-width="2" fill="none" opacity=".75"/></g></g>
+<g class="ly" data-k="190"><path d="M-150 610C300 560 600 620 900 580S1100 570 1350 590V900H-150Z" fill="var(--hill3)"/></g>
+</svg>
 <div class="wrap go">
 <h1>Có những miền ký ức, chỉ cần một chuyến đi để trở về.</h1>
 <p>Cùng Chạm Mây khám phá Huế theo một cách khác — chậm hơn, sâu hơn và gần gũi hơn với những điều bình dị làm nên tuổi thơ.</p>
@@ -255,7 +256,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <h2>Bạn đã bao lâu rồi chưa sống như một đứa trẻ?</h2>
 <p>Ra đồng chân đất, bắt cá dưới mương, chơi ô ăn quan trên nền sân, thả diều đến khi gió lặng, rồi ngồi quanh mâm cơm quê. Đó là tuổi thơ của ông bà, bố mẹ — và Chạm Mây mời bạn sống lại một phiên bản của nó.</p>
 <a class="btn" href="#/tour">Khám phá tour 3 ngày 2 đêm</a></div>
-<div class="rv pc-wrap"><div class="flip" id="flip"><div class="fi"><div class="ff front" id="flip-f" title="Chạm để lật bưu thiếp"></div><div class="ff back"><b>Bưu thiếp gửi một thế hệ</b><input class="pc-in" id="pc-to" maxlength="40" placeholder="Gửi tới (ông bà, ba mẹ, người thân…)" aria-label="Gửi tới"><textarea id="pc-msg" maxlength="260" placeholder="Con muốn nghe ông bà kể về trò chơi mà ngày xưa ông bà thích nhất…" aria-label="Lời nhắn"></textarea><input class="pc-in pc-from" id="pc-from" maxlength="40" placeholder="Người viết" aria-label="Người viết"><span class="st">Huế · Chạm Mây</span></div></div></div>
+<div class="rv pc-wrap"><div class="flip" id="flip"><div class="fi"><div class="ff front" id="flip-f" title="Chạm để lật bưu thiếp"></div><div class="ff back"><input class="pc-title" id="pc-title" maxlength="40" value="Bưu thiếp gửi một thế hệ" placeholder="Tiêu đề bưu thiếp" aria-label="Tiêu đề bưu thiếp"><input class="pc-in" id="pc-to" maxlength="40" placeholder="Gửi tới (ông bà, ba mẹ, người thân…)" aria-label="Gửi tới"><textarea id="pc-msg" maxlength="260" placeholder="Con muốn nghe ông bà kể về trò chơi mà ngày xưa ông bà thích nhất…" aria-label="Lời nhắn"></textarea><input class="pc-in pc-from" id="pc-from" maxlength="40" placeholder="Người viết" aria-label="Người viết"><span class="st">Huế · Chạm Mây</span></div></div></div>
 <div class="pc-tools"><button type="button" class="btn ghost" id="pc-flip">Lật bưu thiếp</button><label class="btn ghost pc-up">Tải ảnh lên<input type="file" id="pc-file" accept="image/*" hidden></label><button type="button" class="btn" id="pc-dl">Tải bưu thiếp về</button></div>
 <p class="hint" id="pc-hint">Viết lời nhắn ở mặt sau, thêm ảnh của bạn ở mặt trước rồi tải về để gửi người thân.</p><button type="button" class="pc-reset" id="pc-reset" hidden>Dùng lại ảnh mẫu</button></div></div></section>
 
@@ -379,7 +380,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <script>
 const CONTACT={email:"[email — cần bổ sung]",tel:"[số điện thoại — cần bổ sung]",addr:"[địa chỉ — cần bổ sung]",fb:"[fanpage — cần bổ sung]"};
 /* Dán link ảnh thật vào đây theo mã địa điểm, ví dụ IMG["dai-noi"]="https://.../dai-noi.jpg". Để trống thì dùng hình minh họa tạm. */
-const IMG=["dai-noi"]="./dai-noi-hue.jpg"
+const IMG={};
 const GROUPS={A:"Khám phá Huế",B:"Tuổi thơ làng quê",C:"Trò chơi dân gian",D:"Sáng tạo và kết nối"};
 const TAGS={"lang-que":"Làng quê","tro-choi":"Trò chơi dân gian","thu-cong":"Thủ công","am-thuc":"Ẩm thực","ket-noi":"Kết nối thế hệ"};
 /* ================= MẠNG XÃ HỘI: chỉnh URL tại đây =================
@@ -582,7 +583,7 @@ c.fillStyle=css("--bg")||"#F2EBDF";c.fillRect(0,0,P*2,Hh);
 const im=photo||await loadSvg();if(im)cover(c,im,0,0,P,Hh);else{c.fillStyle="#E6D5B8";c.fillRect(0,0,P,Hh)}
 const bx=P;c.fillStyle=css("--card")||"#FAF5EA";c.fillRect(bx,0,P,Hh);c.fillStyle=css("--line")||"#D8C9B0";c.fillRect(bx,0,2,Hh);
 const ac=css("--ac")||"#8C3D0F",tx=css("--tx")||"#593202",pad=64;c.textBaseline="alphabetic";
-c.fillStyle=css("--ac2")||"#73280D";c.font='700 52px "Cormorant Garamond",serif';c.fillText("Bưu thiếp gửi một thế hệ",bx+pad,pad+44);
+c.fillStyle=css("--ac2")||"#73280D";const ttl=$("#pc-title").value.trim()||"Bưu thiếp gửi một thế hệ";let fs=52;c.font=`700 ${fs}px "Cormorant Garamond",serif`;while(c.measureText(ttl).width>P-pad*2&&fs>24){fs-=2;c.font=`700 ${fs}px "Cormorant Garamond",serif`}c.fillText(ttl,bx+pad,pad+44);
 c.fillStyle=tx;c.font='italic 600 40px "Cormorant Garamond",serif';let y=pad+120;
 const t=to.value.trim();if(t){c.fillText("Gửi "+t+",",bx+pad,y);y+=64}
 const text=msg.value.trim()||msg.placeholder,lines=wrap(c,text,P-pad*2),lh=54,max=Math.floor((Hh-y-230)/lh);
@@ -772,7 +773,7 @@ document.addEventListener("pointerout",e=>{const t=e.target.closest&&e.target.cl
 
 /* Hiệu ứng 3D: hero nhiều lớp theo chuột và cuộn */
 (()=>{const hero=$("#hero"),L=$$("#hero .ly");let mx=0,my=0,sy=0,t=false;if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
-const ap=()=>{t=false;L.forEach(l=>{const k=+l.dataset.k;l.style.transform=`translate(${(mx*k*.5).toFixed(1)}px,${(my*k*.35+sy*k/500).toFixed(1)}px)`})},rq=()=>{if(!t){t=true;requestAnimationFrame(ap)}};
+const ap=()=>{t=false;L.forEach(l=>{const k=+l.dataset.k;l.style.transform=`translate(${(mx*k*.5).toFixed(1)}px,${(my*k*.35+sy*k/500).toFixed(1)}px)${l.dataset.s?` scale(${l.dataset.s})`:""}`})},rq=()=>{if(!t){t=true;requestAnimationFrame(ap)}};
 hero.addEventListener("pointermove",e=>{const r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;rq()});
 hero.addEventListener("pointerleave",()=>{mx=0;my=0;rq()});
 addEventListener("scroll",()=>{if($('.view[data-v="/"]').classList.contains("on")){sy=Math.min(scrollY,700);rq()}},{passive:true})})();
