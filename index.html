@@ -96,14 +96,25 @@ nav.open{clip-path:inset(0 0 -40px 0);opacity:1;pointer-events:auto}nav a.nl{pad
 .two{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
 @media(max-width:860px){.two{grid-template-columns:1fr}}
 .art{aspect-ratio:4/5;background:var(--sky);border:1px solid var(--line);position:relative;overflow:hidden;border-radius:10px}.art svg{width:100%;height:100%}
-.flip{perspective:1100px;background:none;border:0;padding:0;cursor:pointer;width:100%;max-width:440px;justify-self:center;display:block;color:inherit;font:inherit;text-align:left}
+.flip{perspective:1100px;width:100%;max-width:440px;justify-self:center;display:block}
 .fi{position:relative;display:block;aspect-ratio:4/5;transition:transform 1.1s var(--e);transform-style:preserve-3d}
-.flip:hover .fi,.flip.on .fi{transform:rotateY(180deg) rotateZ(-1deg)}
+.flip.on .fi{transform:rotateY(180deg) rotateZ(-1deg)}
+.flip:focus-within .fi{transform:rotateY(180deg) rotateZ(-1deg)}
+@media (hover:hover){.flip:hover .fi{transform:rotateY(180deg) rotateZ(-1deg)}}
 .ff{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh);display:block}
-.ff.front svg{width:100%;height:100%;display:block}
-.ff.back{transform:rotateY(180deg);background:var(--card);padding:30px 28px;display:flex;flex-direction:column;gap:12px}
-.ff.back b{font:700 1.5rem "Cormorant Garamond",serif;color:var(--ac2)}.ff.back i{font:italic 600 1.25rem/1.5 "Cormorant Garamond",serif}
-.ff.back .ln{height:1px;background:var(--line);margin-top:6px}.ff.back .st{margin-top:auto;align-self:flex-end;border:2px dashed var(--ac);color:var(--ac);padding:6px 10px;font-size:12px;border-radius:3px;transform:rotate(4deg)}
+.ff.front{cursor:pointer}.ff.front svg,.ff.front img{width:100%;height:100%;display:block;object-fit:cover}
+.ff.back{transform:rotateY(180deg);background:var(--card);padding:26px 26px 22px;display:flex;flex-direction:column;gap:10px}
+.ff.back b{font:700 1.5rem "Cormorant Garamond",serif;color:var(--ac2)}
+.pc-in,.ff.back textarea{width:100%;box-sizing:border-box;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--tx);font:italic 600 1.2rem/1.5 "Cormorant Garamond",serif;padding:2px 0;outline:0;border-radius:0}
+.pc-in:focus,.ff.back textarea:focus{border-bottom-color:var(--ac)}
+.pc-in::placeholder,.ff.back textarea::placeholder{color:var(--sub);opacity:.7}
+.ff.back textarea{flex:1;min-height:0;resize:none;border:0;line-height:34px;font-size:1.25rem;background:repeating-linear-gradient(transparent 0 33px,var(--line) 33px 34px) 0 0/100% 34px local}
+.ff.back textarea,.ff.back textarea:focus{border:0!important;box-shadow:none!important;outline:0!important;padding:0;background-color:transparent}.ff.back .pc-in{border:0;border-bottom:1px solid var(--line);background:transparent;box-shadow:none;padding:2px 0;margin:0;border-radius:0}.ff.back .pc-in:focus{border-bottom-color:var(--ac);box-shadow:none}.ff.back .pc-from{text-align:right;width:60%;align-self:flex-end}
+.ff.back .st{align-self:flex-end;border:2px dashed var(--ac);color:var(--ac);padding:4px 10px;font-size:12px;border-radius:3px;transform:rotate(4deg)}
+.pc-wrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.pc-tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+.pc-tools .btn{padding:10px 18px;font-size:15px;cursor:pointer}.pc-up input{display:none}
+.pc-reset{background:none;border:0;color:var(--ac);text-decoration:underline;cursor:pointer;font:inherit;font-size:14px;margin-top:6px}
 .hint{font-size:14px;color:var(--sub);margin-top:14px;text-align:center}
 .dark{background:var(--ac2);color:var(--on)}.dark .note{color:var(--on)}
 .cgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}.cgrid>*{grid-column:span 2}.cgrid>*:nth-child(n+4){grid-column:span 3}
@@ -244,7 +255,9 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <h2>Bạn đã bao lâu rồi chưa sống như một đứa trẻ?</h2>
 <p>Ra đồng chân đất, bắt cá dưới mương, chơi ô ăn quan trên nền sân, thả diều đến khi gió lặng, rồi ngồi quanh mâm cơm quê. Đó là tuổi thơ của ông bà, bố mẹ — và Chạm Mây mời bạn sống lại một phiên bản của nó.</p>
 <a class="btn" href="#/tour">Khám phá tour 3 ngày 2 đêm</a></div>
-<div class="rv" style="display:flex;flex-direction:column;align-items:center"><button class="flip" id="flip" aria-pressed="false" aria-label="Lật tấm bưu thiếp"><span class="fi"><span class="ff front" id="flip-f"></span><span class="ff back"><b>Bưu thiếp gửi một thế hệ</b><i>Con muốn nghe ông bà kể về trò chơi mà ngày xưa ông bà thích nhất…</i><span class="ln"></span><span class="ln"></span><span class="ln"></span><span class="st">Huế · Chạm Mây</span></span></span></button><p class="hint">Chạm vào tấm bưu thiếp để lật mặt sau</p></div></div></section>
+<div class="rv pc-wrap"><div class="flip" id="flip"><div class="fi"><div class="ff front" id="flip-f" title="Chạm để lật bưu thiếp"></div><div class="ff back"><b>Bưu thiếp gửi một thế hệ</b><input class="pc-in" id="pc-to" maxlength="40" placeholder="Gửi tới (ông bà, ba mẹ, người thân…)" aria-label="Gửi tới"><textarea id="pc-msg" maxlength="260" placeholder="Con muốn nghe ông bà kể về trò chơi mà ngày xưa ông bà thích nhất…" aria-label="Lời nhắn"></textarea><input class="pc-in pc-from" id="pc-from" maxlength="40" placeholder="Người viết" aria-label="Người viết"><span class="st">Huế · Chạm Mây</span></div></div></div>
+<div class="pc-tools"><button type="button" class="btn ghost" id="pc-flip">Lật bưu thiếp</button><label class="btn ghost pc-up">Tải ảnh lên<input type="file" id="pc-file" accept="image/*" hidden></label><button type="button" class="btn" id="pc-dl">Tải bưu thiếp về</button></div>
+<p class="hint" id="pc-hint">Viết lời nhắn ở mặt sau, thêm ảnh của bạn ở mặt trước rồi tải về để gửi người thân.</p><button type="button" class="pc-reset" id="pc-reset" hidden>Dùng lại ảnh mẫu</button></div></div></section>
 
 <section class="dark"><div class="wrap">
 <div class="shead rv"><h2>Năm cách chạm vào tuổi thơ</h2><p>Mỗi combo là một lịch trình riêng, cùng một hành trình 3 ngày 2 đêm tại Huế. Bạn không cần tham gia tất cả.</p></div>
@@ -549,9 +562,35 @@ const placeCard=(p,i)=>`<a class="pc tilt" data-t="6" href="#/kham-pha-hue/${p.s
 $("#home-combos").innerHTML=COMBOS.map(cardMini).join("");
 $("#home-hue").innerHTML=["dai-noi","truong-tien-song-huong","cau-ngoi-thanh-toan","lam-nong","tha-dieu","thuyen-rong-ca-hue"].map(s=>placeCard(pById[s],PLACES.indexOf(pById[s]))).join("");
 $("#places").innerHTML=PLACES.map(placeCard).join("");
-$("#flip-f").innerHTML=scene("games",1);
 $("#about-art").innerHTML=scene("farm",2);
-$("#flip").onclick=e=>{const b=e.currentTarget;const o=b.classList.toggle("on");b.setAttribute("aria-pressed",o)};
+/* Bưu thiếp tự viết */
+(()=>{const fl=$("#flip"),front=$("#flip-f"),msg=$("#pc-msg"),to=$("#pc-to"),from=$("#pc-from"),hint=$("#pc-hint"),rs=$("#pc-reset");let photo=null,url=null;const H0=hint.textContent;
+const flip=v=>{const o=v===undefined?!fl.classList.contains("on"):v;fl.classList.toggle("on",o);$("#pc-flip").textContent=o?"Xem mặt trước":"Lật bưu thiếp"};
+front.onclick=()=>flip();$("#pc-flip").onclick=()=>flip();
+const note=t=>{hint.textContent=t;clearTimeout(note.t);note.t=setTimeout(()=>hint.textContent=H0,4500)};
+const reset=()=>{if(url)URL.revokeObjectURL(url);photo=url=null;front.innerHTML=scene("games",1);rs.hidden=true;$("#pc-file").value=""};
+reset();rs.onclick=reset;
+$("#pc-file").onchange=e=>{const f=e.target.files[0];if(!f)return;if(!/^image\//.test(f.type)){note("Vui lòng chọn một tệp ảnh.");return}if(f.size>20*1024*1024){note("Ảnh quá lớn, vui lòng chọn ảnh dưới 20MB.");return}
+const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{if(url)URL.revokeObjectURL(url);url=u;photo=im;front.innerHTML="";const t=document.createElement("img");t.src=u;t.alt="Ảnh bưu thiếp của bạn";front.appendChild(t);rs.hidden=false;flip(false)};im.onerror=()=>{URL.revokeObjectURL(u);note("Không đọc được ảnh này, hãy thử ảnh khác.")};im.src=u};
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const wrap=(c,t,w)=>{const out=[];t.split("\n").forEach(p=>{let l="";p.split(/\s+/).filter(Boolean).forEach(x=>{const n=l?l+" "+x:x;if(c.measureText(n).width>w&&l){out.push(l);l=x}else l=n});out.push(l)});return out};
+const loadSvg=()=>new Promise(r=>{const sv=front.querySelector("svg");if(!sv)return r(null);let x=new XMLSerializer().serializeToString(sv);x=x.replace(/var\((--[\w-]+)\)/g,(m,n)=>css(n)||"#E6D5B8");if(!/xmlns=/.test(x.slice(0,200)))x=x.replace("<svg",'<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"');else x=x.replace("<svg",'<svg width="400" height="300"');const im=new Image();im.onload=()=>r(im);im.onerror=()=>r(null);im.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(x)});
+const cover=(c,im,x,y,w,h)=>{const iw=im.naturalWidth||im.width,ih=im.naturalHeight||im.height,k=Math.max(w/iw,h/ih),dw=iw*k,dh=ih*k;c.save();c.beginPath();c.rect(x,y,w,h);c.clip();c.drawImage(im,x+(w-dw)/2,y+(h-dh)/2,dw,dh);c.restore()};
+$("#pc-dl").onclick=async()=>{try{await Promise.all(['italic 600 40px "Cormorant Garamond"','700 52px "Cormorant Garamond"'].map(f=>document.fonts.load(f))).catch(()=>{})}catch(e){}
+const P=800,Hh=1000,cv=document.createElement("canvas");cv.width=P*2;cv.height=Hh;const c=cv.getContext("2d");
+c.fillStyle=css("--bg")||"#F2EBDF";c.fillRect(0,0,P*2,Hh);
+const im=photo||await loadSvg();if(im)cover(c,im,0,0,P,Hh);else{c.fillStyle="#E6D5B8";c.fillRect(0,0,P,Hh)}
+const bx=P;c.fillStyle=css("--card")||"#FAF5EA";c.fillRect(bx,0,P,Hh);c.fillStyle=css("--line")||"#D8C9B0";c.fillRect(bx,0,2,Hh);
+const ac=css("--ac")||"#8C3D0F",tx=css("--tx")||"#593202",pad=64;c.textBaseline="alphabetic";
+c.fillStyle=css("--ac2")||"#73280D";c.font='700 52px "Cormorant Garamond",serif';c.fillText("Bưu thiếp gửi một thế hệ",bx+pad,pad+44);
+c.fillStyle=tx;c.font='italic 600 40px "Cormorant Garamond",serif';let y=pad+120;
+const t=to.value.trim();if(t){c.fillText("Gửi "+t+",",bx+pad,y);y+=64}
+const text=msg.value.trim()||msg.placeholder,lines=wrap(c,text,P-pad*2),lh=54,max=Math.floor((Hh-y-230)/lh);
+lines.slice(0,Math.max(max,1)).forEach((l,i)=>{c.fillText(l,bx+pad,y+i*lh)});
+c.strokeStyle=css("--line")||"#D8C9B0";c.lineWidth=2;for(let i=0;i<=max;i++){const yy=y+i*lh+14;c.beginPath();c.moveTo(bx+pad,yy);c.lineTo(bx+P-pad,yy);c.stroke()}
+const f=from.value.trim();if(f){c.textAlign="right";c.fillStyle=tx;c.fillText(f,bx+P-pad,Hh-pad-70);c.textAlign="left"}
+c.save();c.translate(bx+P-pad-120,Hh-pad-20);c.rotate(.07);c.setLineDash([8,6]);c.lineWidth=3;c.strokeStyle=ac;c.strokeRect(-110,-24,230,44);c.setLineDash([]);c.fillStyle=ac;c.font='600 22px "Be Vietnam Pro",sans-serif';c.textAlign="center";c.fillText("Huế · Chạm Mây",5,6);c.restore();
+cv.toBlob(b=>{if(!b){note("Không tạo được ảnh, hãy thử lại.");return}const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="buu-thiep-cham-may.png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);note("Đã tải bưu thiếp về máy của bạn.")},"image/png")}})();
 
 /* Trang Tour */
 let cf="",openId="";
