@@ -52,8 +52,6 @@ nav a.nl:hover:after,nav a.nl[aria-current=page]:after{transform:scaleX(1)}
 #burger i{position:absolute;left:12px;right:12px;height:2px;background:currentColor;border-radius:2px;transition:transform .45s var(--e),opacity .3s}
 #burger i:nth-child(1){top:15px}#burger i:nth-child(2){top:21px}#burger i:nth-child(3){top:27px}
 #burger[aria-expanded=true] i:nth-child(1){transform:translateY(6px) rotate(45deg)}#burger[aria-expanded=true] i:nth-child(2){opacity:0}#burger[aria-expanded=true] i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-#prog{position:fixed;top:0;left:0;right:0;height:3px;background:var(--ac2);transform:scaleX(0);transform-origin:left;z-index:40;pointer-events:none}#prog.go{animation:prog .8s var(--e)}
-@keyframes prog{0%{transform:scaleX(0);opacity:1}70%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
 @media(max-width:1180px){.bar{grid-template-columns:1fr auto}#burger{display:block}
 nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;gap:4px;background:var(--bg);color:var(--tx);padding:18px 24px 26px;box-shadow:0 20px 30px -20px rgba(89,50,2,.5);clip-path:inset(0 0 100% 0);opacity:0;pointer-events:none;transition:clip-path .55s var(--e),opacity .35s}
 nav.open{clip-path:inset(0 0 -40px 0);opacity:1;pointer-events:auto}nav a.nl{padding:10px 0}nav a.nl:after{left:0;right:0;bottom:6px}.sbtn{margin-left:-8px}}
@@ -236,7 +234,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 .dl{margin:0;padding-left:20px;font-size:15px}.dl li{margin:5px 0}.cnote{font-size:14px;color:var(--sub);margin:10px 0 0}.plab{display:block;font:500 .8rem "Be Vietnam Pro",sans-serif;color:var(--sub)}
 .est.live.show{animation:dopen .5s var(--e)}.est .ps{margin:0 0 6px;font-size:14px;color:var(--sub)}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}.hero .go>*{opacity:1;transform:none}.tilt{transform:none}}
-@media print{header,footer,.tools,.item button,#planner-form,.pagehead,#prog{display:none!important}body{background:#fff;color:#000}.rv{opacity:1;transform:none}}
+@media print{header,footer,.tools,.item button,#planner-form,.pagehead{display:none!important}body{background:#fff;color:#000}.rv{opacity:1;transform:none}}
 
 
 /* Responsive pass: mobile, tablet and compact laptop */
@@ -348,10 +346,21 @@ input,select,textarea,button{max-width:100%;touch-action:manipulation}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
 
+
+/* Fix contrast: headings on dark accent sections must stay cream, not animate through a low-contrast brown gradient. */
+.dark .reveal-text,
+.dark .rv h1,
+.dark .rv h2,
+.dark .rv h3 {
+  color: var(--on) !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: var(--on) !important;
+}
 </style>
 </head>
 <body>
-<div id="prog"></div>
 <header id="hd"><div class="bar">
 <a class="logo" href="#/">CHẠM MÂY TRAVEL</a>
 <nav id="nav" aria-label="Điều hướng chính">
@@ -1042,7 +1051,7 @@ hero.addEventListener("pointerleave",()=>{mx=0;my=0;rq()});
 addEventListener("scroll",()=>{if($('.view[data-v="/"]').classList.contains("on")){sy=Math.min(scrollY,700);rq()}},{passive:true})})();
 
 /* Router */
-const hd=$("#hd"),nav=$("#nav"),bg=$("#burger"),prog=$("#prog");
+const hd=$("#hd"),nav=$("#nav"),bg=$("#burger");
 bg.onclick=()=>{const o=nav.classList.toggle("open");bg.setAttribute("aria-expanded",o)};
 function route(){const raw=location.hash.replace(/^#/,"")||"/",p=raw.split("/").filter(Boolean);let k="/"+(p[0]||""),arg=p[1]||"";
 if(k==="/cam-nang"&&arg){if(GUIDES.some(g=>g.id===arg))k="/guide-detail";else{location.replace("#/cam-nang");return}}
@@ -1053,10 +1062,9 @@ if(!$(`.view[data-v="${k}"]`)){k="/";arg=""}
 const nk=k==="/place"?"/kham-pha-hue":k==="/policy"?"":k==="/guide-detail"?"/cam-nang":k;
 
 if(k==="/guide-detail")renderGuide(arg);if(k==="/place")renderPlace(arg);if(k==="/policy")renderPolicy(arg);if(k==="/tour"){if(arg)cf="",openId=arg,$$("#cf button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===""));renderCombos()}if(k==="/ca-nhan"){renderPlan();renderLive()}if(k==="/danh-gia")renderRv();
-prog.classList.remove("go");void prog.offsetWidth;prog.classList.add("go");
 const view=$(`.view[data-v="${k}"]`);const bannerMap={"/tour":"./banner-tour-3n2d.jpg","/ca-nhan":"./banner-du-lich-ca-nhan.jpg","/ve-cham-may":"./banner-ve-cham-may.jpg","/kham-pha-hue":"./banner-kham-pha-hue.jpg","/cam-nang":"./banner-kham-pha-hue.jpg"};const ph=view.querySelector(".pagehead");if(ph&&bannerMap[k])ph.style.setProperty("--page-banner",`url("${bannerMap[k]}")`);$$(".view").forEach(v=>v.classList.toggle("on",v===view));
 $$("#hd a[data-r]").forEach(a=>{if(a.dataset.r===nk)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
-nav.classList.remove("open");bg.setAttribute("aria-expanded","false");window.scrollTo(0,0);hd.classList.toggle("solid",k!=="/"||scrollY>20);
+nav.classList.remove("open");bg.setAttribute("aria-expanded","false");window.scrollTo({top:0,behavior:"instant"});hd.classList.toggle("solid",k!=="/"||scrollY>20);
 document.title=(k==="/"?"":k==="/place"?pById[arg].n+" — ":k==="/policy"?polBy[arg].n+" — ":$(".pagehead h1",view).textContent+" — ")+"Chạm Mây Travel";
 rvScan(view);
 if(k==="/tour"&&arg)setTimeout(()=>{const e=$("#cb-"+arg);if(e)e.scrollIntoView({behavior:"smooth",block:"start"})},350)}
