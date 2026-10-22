@@ -78,7 +78,7 @@ nav.open{clip-path:inset(0 0 -40px 0);opacity:1;pointer-events:auto}nav a.nl{pad
 
 /* Hero */
 .hero{background-image:linear-gradient(180deg,rgba(31,18,7,.26),rgba(31,18,7,.2)),url("./banner-trang-chu.jpg");background-size:cover;background-position:center;min-height:100svh;position:relative;display:flex;align-items:flex-end;color:var(--on);background-color:var(--hill3);overflow:hidden;padding:0}
-.hero .countryside-image{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:hidden;background:var(--hill3)}.hero .countryside-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}.hero svg{position:absolute;inset:0;width:100%;height:100%}.ly{transition:transform .35s ease-out}
+.hero .countryside-image{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:hidden;background:var(--hill3)}.hero .countryside-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}.hero>svg{display:none!important}.hero .ly{transition:transform .35s ease-out}
 .kite{animation:sway 7s ease-in-out infinite;transform-origin:300px 520px}
 @keyframes sway{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3.5deg) translateY(-14px)}}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,18,7,.6) 0,rgba(31,18,7,0) 24%,rgba(31,18,7,0) 42%,rgba(31,18,7,.72) 100%);pointer-events:none}
@@ -230,6 +230,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <!-- TRANG CHỦ -->
 <div class="view" data-v="/">
 <section class="hero" id="hero" aria-label="Giới thiệu">
+<div class="countryside-image" aria-hidden="true"><img src="./banner-trang-chu.jpg" alt="" onerror="this.parentElement.style.display='none'"></div>
 <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Minh họa đồng quê Huế lúc chiều, có con diều trên trời (ảnh minh họa tạm, thay bằng ảnh thật)">
 <rect x="-200" y="-200" width="1600" height="1100" fill="var(--sky)"/>
 <g class="ly" data-k="40"><circle cx="880" cy="250" r="90" fill="#C98A4B" opacity=".85"/></g>
