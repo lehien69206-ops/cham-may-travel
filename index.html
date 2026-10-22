@@ -224,7 +224,7 @@ footer ul{list-style:none;padding:0;margin:0}footer li{margin:8px 0;font-size:15
 dialog{border:1px solid var(--line);background:var(--bg);color:var(--tx);max-width:min(640px,92vw);width:100%;padding:24px;border-radius:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}dialog[open]{animation:pop .5s var(--e)}dialog::backdrop{background:rgba(40,22,5,.62);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 @keyframes pop{from{opacity:0;transform:translateY(24px) scale(.95)}to{opacity:1;transform:none}}
 .sri{display:block;padding:11px 8px;border-bottom:1px solid var(--line);text-decoration:none;border-radius:6px;transition:background .3s,padding .4s var(--e)}.sri:hover{background:var(--card);padding-left:16px}.sri small{display:block;color:var(--sub)}
-.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}.gt{background:var(--card);border:1px solid var(--line);padding:0;cursor:pointer;color:var(--tx);font:inherit;text-align:left;border-radius:12px;overflow:hidden;width:100%}.gt svg,.gt img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.gt span{display:block;padding:9px 12px;font-size:14px}#lb-i svg,#lb-i img{display:block;width:100%;height:auto;max-height:60vh;object-fit:contain;border-radius:10px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px} .image-missing{position:relative;background:var(--sky)}.image-missing:after{content:attr(data-image-note);display:block;padding:14px;color:var(--sub);font-size:13px;text-align:center}.gt{background:var(--card);border:1px solid var(--line);padding:0;cursor:pointer;color:var(--tx);font:inherit;text-align:left;border-radius:12px;overflow:hidden;width:100%}.gt svg,.gt img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.gt span{display:block;padding:9px 12px;font-size:14px}#lb-i svg,#lb-i img{display:block;width:100%;height:auto;max-height:60vh;object-fit:contain;border-radius:10px}
 /* Mạng xã hội (footer) */
 .soc-h{margin-top:22px}.soc-list{display:flex;flex-wrap:wrap;gap:8px}.soc-empty{margin:0;font-size:14px;opacity:.75}
 footer a.soc{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1px solid rgba(242,235,223,.32);border-radius:999px;font-size:14px;transition:background .3s,border-color .3s,transform .45s var(--e),opacity .3s}
@@ -476,7 +476,32 @@ tea:'<path d="M80 250V150M320 250V150" stroke="var(--hill3)" stroke-width="7"/><
 food:'<path d="M110 200h180a90 52 0 0 1-180 0z" fill="var(--on)"/><g fill="#C98A4B"><ellipse cx="160" cy="190" rx="26" ry="14"/><ellipse cx="205" cy="184" rx="26" ry="14"/><ellipse cx="248" cy="192" rx="26" ry="14"/></g>',
 boat:'<path d="M0 238q25-10 50 0t50 0t50 0t50 0t50 0t50 0t50 0t50 0" stroke="var(--on)" stroke-width="2.5" fill="none" opacity=".7"/><path d="M90 215q110 30 220 0l-14-30H108z" fill="var(--ac)"/><path d="M300 190q30-20 10-50" stroke="var(--ac)" stroke-width="6" fill="none"/><path d="M150 185v-45l55 30z" fill="var(--on)"/><circle cx="130" cy="170" r="8" fill="#C98A4B"/>'};
 const scene=(k,i=0)=>`<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="300" fill="var(--sky)"/><circle cx="${300-(i%4)*30}" cy="${64+(i%3)*10}" r="${32+(i%3)*4}" fill="#C98A4B" opacity=".85"/><path d="M-10 190C60 150 130 180 200 160S340 140 410 170V310H-10z" fill="var(--hill1)"/><path d="M-10 225C80 195 160 230 260 205S370 195 410 210V310H-10z" fill="var(--hill2)"/>${MOT[k]||""}<path d="M-10 268C100 250 220 276 410 255V310H-10z" fill="var(--hill3)"/></svg>`;
-const pic=(slug,k,i)=>IMG[slug]?`<img src="${IMG[slug]}" alt="" loading="lazy">`:scene(k,i);
+/* Một số trình duyệt/GitHub Pages có thể không tìm thấy ảnh nếu phần mở rộng tên file khác.
+   Ảnh thuyền rồng được thử lần lượt theo các tên phổ biến trước khi dùng hình minh họa dự phòng. */
+const IMG_FALLBACKS={
+  "thuyen-rong-ca-hue":[
+    "./di-thuyen-rong-va-nghe-ca-hue-tren-song-huong.jpeg",
+    "./di-thuyen-rong-va-nghe-ca-hue-tren-song-huong.png",
+    "./di-thuyen-rong-va-nghe-ca-hue-tren-song-huong.JPG",
+    "./di-thuyen-rong-va-nghe-ca-hue-tren-song-huong-1.jpg",
+    "./di-thuyen-rong-nghe-ca-hue-tren-song-huong.jpg"
+  ]
+};
+const imgMarkup=(slug,alt="")=>`<img src="${IMG[slug]}" data-img-key="${slug}" data-img-try="0" alt="${alt}" loading="lazy">`;
+const pic=(slug,k,i)=>IMG[slug]?imgMarkup(slug,slug==="thuyen-rong-ca-hue"?"Đi thuyền rồng và nghe ca Huế trên sông Hương":""):scene(k,i);
+/* Thử các phần mở rộng/tên thay thế nếu tệp ảnh chính không tồn tại. */
+document.addEventListener("error",e=>{
+  const im=e.target;
+  if(!(im instanceof HTMLImageElement)||!im.dataset.imgKey)return;
+  const candidates=IMG_FALLBACKS[im.dataset.imgKey]||[];
+  const idx=Number(im.dataset.imgTry||0);
+  if(idx<candidates.length){im.dataset.imgTry=String(idx+1);im.src=candidates[idx];return;}
+  if(im.dataset.imgKey==="thuyen-rong-ca-hue"){
+    const wrap=im.parentElement;
+    if(wrap){wrap.classList.add("image-missing");wrap.setAttribute("data-image-note","Ảnh thuyền rồng chưa tải được — kiểm tra tên tệp trên GitHub");}
+    console.warn("Không tải được ảnh thuyền rồng. Hãy kiểm tra tên file trong repository:",im.currentSrc||im.src);
+  }
+},true);
 
 /* Hoạt động: id, tên, nhóm, giờ, mô tả, giá thấp, giá cao (nghìn VNĐ/người), ghi chú nếu 0 */
 const A=[
@@ -511,7 +536,7 @@ const aprice=a=>rng(a.lo,a.hi,a.f);
 const D1=["dainoi","dongba","huong","amthuc"];
 const CNOTE="Một số hoạt động phụ thuộc thời tiết, mùa vụ, địa điểm và đối tác tại thời điểm tổ chức; Chạm Mây sẽ xác nhận hoặc đề xuất hoạt động thay thế khi tư vấn.";
 const COMBOS=[
-{id:"lang-que",n:"Tuổi thơ làng quê",t:"Trở về nhịp sống thôn quê, tự tay làm những công việc bình dị và cảm nhận tuổi thơ của các thế hệ trước.",tag:"lang-que",sc:"farm",hl:"Làm nông, bắt cá và nấu cơm quê.",p:[4000,4800],days:[
+{id:"lang-que",n:"Miền quê thương nhớ",t:"Trở về nhịp sống thôn quê, tự tay làm những công việc bình dị và cảm nhận tuổi thơ của các thế hệ trước.",tag:"lang-que",sc:"farm",hl:"Làm nông, bắt cá và nấu cơm quê.",p:[4000,4800],days:[
 {t:"Chạm vào nhịp sống Cố đô",ids:["dainoi", "dongba", "huong", "amthuc"],a:["Tham quan Đại Nội Huế, tìm hiểu những câu chuyện lịch sử và văn hóa cung đình.", "Khám phá chợ Đông Ba, tìm hiểu nguyên liệu và đặc sản địa phương.", "Dạo bên sông Hương, check-in cầu Trường Tiền.", "Thưởng thức ẩm thực Huế và nhận thông tin về hành trình trải nghiệm làng quê."]},
 {t:"Một ngày làm người làng",ids:["ngoi", "chole", "nong", "cabat", "comque", "tra"],a:["Tham quan Cầu Ngói Thanh Toàn và không gian làng quê.", "Ghé chợ quê, tìm hiểu cách người dân lựa chọn nguyên liệu cho bữa cơm gia đình.", "Trải nghiệm làm nông hoặc chăm sóc vườn rau theo mùa.", "Thử hoạt động bắt cá tại địa điểm tổ chức phù hợp, có người hướng dẫn.", "Cùng chuẩn bị và thưởng thức bữa cơm quê với nguyên liệu địa phương.", "Nghỉ ngơi, uống trà, trò chuyện và tìm hiểu nếp sống truyền thống."]},
 {t:"Giữ lại hương vị quê nhà",ids:["gl", "bt"],a:["Tham gia hoạt động chăm sóc hoặc thu hoạch nông sản nếu đúng mùa.", "Giao lưu với người dân địa phương, nghe kể về cuộc sống và tuổi thơ ngày trước.", "Tham gia hoạt động viết bưu thiếp “Một điều tôi muốn kể về tuổi thơ”.", "Tổng kết hành trình, chụp ảnh lưu niệm và kết thúc tour."]}]},
@@ -854,7 +879,7 @@ const GAL=[
  {n:"Cầu Ngói Thanh Toàn",s:"cau-ngoi-thanh-toan",k:"ngoi"},
  {n:"Ẩm thực đặc sản Huế",s:"am-thuc-hue",k:"food"}
 ];let gi=0;const lb=$("#lb");
-const galleryImage=(t,i)=>IMG[t.s]?`<img src="${IMG[t.s]}" alt="${t.n}" loading="lazy">`:scene(t.k,i);
+const galleryImage=(t,i)=>IMG[t.s]?imgMarkup(t.s,t.n):scene(t.k,i);
 $("#gal").innerHTML=GAL.map((t,i)=>`<button type="button" class="gt tilt" data-t="7" data-i="${i}" aria-label="Mở ảnh: ${t.n}">${galleryImage(t,i)}<span>${t.n}</span></button>`).join("");
 function showG(){const t=GAL[gi];$("#lb-i").innerHTML=galleryImage(t,gi);$("#lb-c").textContent=t.n}
 $("#gal").onclick=e=>{const b=e.target.closest(".gt");if(b){gi=+b.dataset.i;showG();lb.showModal()}};
