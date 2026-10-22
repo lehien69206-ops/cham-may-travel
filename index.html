@@ -200,7 +200,7 @@ footer ul{list-style:none;padding:0;margin:0}footer li{margin:8px 0;font-size:15
 dialog{border:1px solid var(--line);background:var(--bg);color:var(--tx);max-width:min(640px,92vw);width:100%;padding:24px;border-radius:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}dialog[open]{animation:pop .5s var(--e)}dialog::backdrop{background:rgba(40,22,5,.62);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 @keyframes pop{from{opacity:0;transform:translateY(24px) scale(.95)}to{opacity:1;transform:none}}
 .sri{display:block;padding:11px 8px;border-bottom:1px solid var(--line);text-decoration:none;border-radius:6px;transition:background .3s,padding .4s var(--e)}.sri:hover{background:var(--card);padding-left:16px}.sri small{display:block;color:var(--sub)}
-.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}.gt{background:var(--card);border:1px solid var(--line);padding:0;cursor:pointer;color:var(--tx);font:inherit;text-align:left;border-radius:12px;overflow:hidden;width:100%}.gt svg{display:block;width:100%;aspect-ratio:4/3}.gt span{display:block;padding:9px 12px;font-size:14px}#lb-i svg{width:100%;height:auto;max-height:60vh;border-radius:10px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}.gt{background:var(--card);border:1px solid var(--line);padding:0;cursor:pointer;color:var(--tx);font:inherit;text-align:left;border-radius:12px;overflow:hidden;width:100%}.gt svg,.gt img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.gt span{display:block;padding:9px 12px;font-size:14px}#lb-i svg,#lb-i img{display:block;width:100%;height:auto;max-height:60vh;object-fit:contain;border-radius:10px}
 /* Mạng xã hội (footer) */
 .soc-h{margin-top:22px}.soc-list{display:flex;flex-wrap:wrap;gap:8px}.soc-empty{margin:0;font-size:14px;opacity:.75}
 footer a.soc{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1px solid rgba(242,235,223,.32);border-radius:999px;font-size:14px;transition:background .3s,border-color .3s,transform .45s var(--e),opacity .3s}
@@ -272,7 +272,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <div class="st3"><div class="nb">2</div><h3>Trở về tuổi thơ</h3><p>Một ngày ở làng quê Thanh Toàn, trải nghiệm theo chủ đề của combo bạn chọn.</p></div>
 <div class="st3"><div class="nb">3</div><h3>Mang ký ức trở về</h3><p>Viết “Bưu thiếp gửi một thế hệ”, chia sẻ và tổng kết hành trình.</p></div></div></div></section>
 
-<section style="background:var(--card)"><div class="wrap"><div class="shead rv"><h2 class="hue">Khám phá Huế</h2><p>Những trải nghiệm tiêu biểu trong hành trình của Chạm Mây. Chạm vào từng thẻ để đọc bài giới thiệu.</p></div><div class="pgrid rvg" id="home-hue"></div><div style="text-align:center;margin-top:40px" class="rv"><a class="btn" href="#/kham-pha-hue">Xem tất cả địa điểm</a><p class="note" style="margin-top:14px">Hình minh họa tạm, sẽ thay bằng ảnh thật.</p></div></div></section>
+<section style="background:var(--card)"><div class="wrap"><div class="shead rv"><h2 class="hue">Khám phá Huế</h2><p>Những trải nghiệm tiêu biểu trong hành trình của Chạm Mây. Chạm vào từng thẻ để đọc bài giới thiệu.</p></div><div class="pgrid rvg" id="home-hue"></div><div style="text-align:center;margin-top:40px" class="rv"><a class="btn" href="#/kham-pha-hue">Xem tất cả địa điểm</a><p class="note" style="margin-top:14px">Ảnh từ thư viện Chạm Mây; những mục chưa có ảnh sẽ dùng hình minh họa tạm.</p></div></div></section>
 
 <section><div class="wrap why"><div class="rv"><h2>Vì sao chọn Chạm Mây?</h2><p>Chúng mình làm du lịch để bạn ngồi lại lâu hơn, nghe nhiều hơn và mang về những điều không mua được.</p><a class="btn ghost dk" href="#/ve-cham-may">Về Chạm Mây</a></div>
 <ul class="values rvg">
@@ -321,12 +321,12 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <div class="pagehead"><div class="wrap"><h1>Chạm vào những điều bình dị, tìm lại những điều quý giá.</h1><p>Chạm Mây làm du lịch trải nghiệm văn hóa, đi chậm và gần với đời sống địa phương.</p></div></div>
 <section><div class="wrap two"><div class="rv"><h2>Câu chuyện ra đời</h2><div class="msg">Phần này cần bạn bổ sung: lý do thành lập, con người, thời điểm bắt đầu. Chúng mình không tự viết lịch sử hay số liệu.</div><h2 style="margin-top:1.2em">Đi chậm, cảm nhận sâu, kết nối thật</h2><p>Slow travel với Chạm Mây là ít điểm dừng hơn, nhiều thời gian ngồi lại hơn, và để người địa phương dẫn bạn vào nhịp sống của họ.</p></div><div class="art tilt rv" id="about-art" data-t="7"></div></div></section>
 <section style="background:var(--card)"><div class="wrap"><div class="shead rv"><h2>“Một phiên bản tuổi thơ” nghĩa là gì?</h2><p>Là sống lại những việc ông bà, bố mẹ từng làm khi còn nhỏ: ra đồng, bắt cá, chơi trò dân gian, thả diều, viết một tấm bưu thiếp gửi người thân. Mỗi hoạt động là một mảnh ký ức được đánh thức.</p></div><ul class="values rvg" style="max-width:860px;margin:auto"><li><b>Văn hóa bản địa</b><span>Trải nghiệm cùng người dân địa phương.</span></li><li><b>Tính chân thực</b><span>Hoạt động đời thường, không dàn dựng.</span></li><li><b>Trải nghiệm tương tác</b><span>Bạn làm, bạn chơi, bạn nấu.</span></li><li><b>Kết nối thế hệ</b><span>Người lớn kể, người trẻ nghe và cùng chơi.</span></li></ul></div></section>
-<section><div class="wrap"><div class="shead rv"><h2>Cách Chạm Mây xây một hành trình</h2><p>Chúng mình chọn hoạt động theo chủ đề, sắp xếp thành nhịp thư thả có giờ nghỉ, rồi điều chỉnh theo nhóm khách. Thời gian cụ thể được xác nhận trước khi chuyến đi diễn ra.</p></div><h2 class="rv" style="text-align:center">Hình ảnh</h2><p class="note rv" style="text-align:center;margin-inline:auto">Hình minh họa tạm, sẽ thay bằng ảnh thật.</p><div class="gal rvg" id="gal"></div><div class="btns rv" style="margin-top:40px;justify-content:center"><a class="btn" href="#/tour">Xem tour 3N2Đ</a><a class="btn ghost dk" href="#/ca-nhan">Tự thiết kế chuyến đi</a></div></div></section></div>
+<section><div class="wrap"><div class="shead rv"><h2>Cách Chạm Mây xây một hành trình</h2><p>Chúng mình chọn hoạt động theo chủ đề, sắp xếp thành nhịp thư thả có giờ nghỉ, rồi điều chỉnh theo nhóm khách. Thời gian cụ thể được xác nhận trước khi chuyến đi diễn ra.</p></div><h2 class="rv" style="text-align:center">Hình ảnh</h2><p class="note rv" style="text-align:center;margin-inline:auto">Ảnh từ thư viện Chạm Mây; những mục chưa có ảnh sẽ dùng hình minh họa tạm.</p><div class="gal rvg" id="gal"></div><div class="btns rv" style="margin-top:40px;justify-content:center"><a class="btn" href="#/tour">Xem tour 3N2Đ</a><a class="btn ghost dk" href="#/ca-nhan">Tự thiết kế chuyến đi</a></div></div></section></div>
 
 <!-- KHÁM PHÁ HUẾ -->
 <div class="view" data-v="/kham-pha-hue">
 <div class="pagehead"><div class="wrap"><h1>Huế — nơi thời gian trôi chậm hơn một nhịp.</h1><p>Huế không chỉ để tham quan, mà còn là nơi lưu giữ ký ức. Chọn một địa điểm để đọc bài giới thiệu.</p></div></div>
-<section><div class="wrap"><p class="note rv" style="text-align:center;margin-inline:auto">Ảnh thật sẽ được bổ sung sau; bản này dùng hình minh họa tạm.</p><div class="pgrid rvg" id="places" style="margin-top:20px"></div>
+<section><div class="wrap"><p class="note rv" style="text-align:center;margin-inline:auto">Ảnh được lấy từ thư viện Chạm Mây; mục nào chưa có ảnh sẽ dùng hình minh họa tạm.</p><div class="pgrid rvg" id="places" style="margin-top:20px"></div>
 <h2 class="rv" style="margin-top:70px;text-align:center">Huế theo cách của bạn</h2><div class="chips rv" style="justify-content:center"><a class="chip" href="#/ca-nhan">Văn hóa: Đại Nội</a><a class="chip" href="#/ca-nhan">Làng quê: làm nông, bắt cá</a><a class="chip" href="#/ca-nhan">Ẩm thực: bữa cơm quê</a><a class="chip" href="#/ca-nhan">Nghệ thuật: tranh dân gian</a><a class="chip" href="#/ca-nhan">Thư giãn: sông Hương</a></div></div></section></div>
 
 <!-- CẨM NANG DU LỊCH -->
@@ -759,9 +759,21 @@ const IDX=[...A.map(a=>({n:a.n,k:"Hoạt động: "+GROUPS[a.g],r:"/ca-nhan",t:a
 const sd=$("#sd");$("#sb").onclick=()=>{sd.showModal();$("#sq").focus()};$("#sx").onclick=()=>sd.close();
 $("#sq").oninput=()=>{const q=nz($("#sq").value.trim()),o=$("#sr");if(!q){o.innerHTML='<p class="note">Thử: ô ăn quan, thả diều, Đại Nội, làng quê, hoàn tiền.</p>';return}const r=IDX.filter(x=>nz(x.t).includes(q)).slice(0,12);o.innerHTML=r.length?r.map(x=>`<a class="sri" href="#${x.r}">${x.n}<small>${x.k}</small></a>`).join(""):'<p>Không tìm thấy. Thử “làng quê”, “trò chơi” hoặc “Huế”.</p>'};
 $("#sr").onclick=e=>{if(e.target.closest("a"))sd.close()};
-const GAL=[["Làng quê Huế","farm"],["Chợ quê","market"],["Trò chơi dân gian","games"],["Diều giấy","kite"],["Đồ thủ công","craft"],["Bưu thiếp viết tay","story"]];let gi=0;const lb=$("#lb");
-$("#gal").innerHTML=GAL.map((t,i)=>`<button type="button" class="gt tilt" data-t="7" data-i="${i}" aria-label="Mở ảnh: ${t[0]}">${scene(t[1],i)}<span>${t[0]}</span></button>`).join("");
-function showG(){$("#lb-i").innerHTML=scene(GAL[gi][1],gi);$("#lb-c").textContent=GAL[gi][0]+" (ảnh minh họa tạm)"}
+const GAL=[
+ {n:"Làng quê Huế",s:"lam-nong",k:"farm"},
+ {n:"Chợ quê",s:"cho-que",k:"market"},
+ {n:"Trò chơi dân gian",s:"tro-choi-dan-gian",k:"games"},
+ {n:"Diều giấy",s:"tha-dieu",k:"kite"},
+ {n:"Đồ thủ công",s:"thu-cong",k:"craft"},
+ {n:"Bưu thiếp viết tay",s:"buu-thiep-gui-mot-the-he",k:"story"},
+ {n:"Đi thuyền rồng và nghe ca Huế trên sông Hương",s:"thuyen-rong-ca-hue",k:"boat"},
+ {n:"Đại Nội Huế",s:"dai-noi",k:"gate"},
+ {n:"Cầu Ngói Thanh Toàn",s:"cau-ngoi-thanh-toan",k:"ngoi"},
+ {n:"Ẩm thực đặc sản Huế",s:"am-thuc-hue",k:"food"}
+];let gi=0;const lb=$("#lb");
+const galleryImage=(t,i)=>IMG[t.s]?`<img src="${IMG[t.s]}" alt="${t.n}" loading="lazy">`:scene(t.k,i);
+$("#gal").innerHTML=GAL.map((t,i)=>`<button type="button" class="gt tilt" data-t="7" data-i="${i}" aria-label="Mở ảnh: ${t.n}">${galleryImage(t,i)}<span>${t.n}</span></button>`).join("");
+function showG(){const t=GAL[gi];$("#lb-i").innerHTML=galleryImage(t,gi);$("#lb-c").textContent=t.n}
 $("#gal").onclick=e=>{const b=e.target.closest(".gt");if(b){gi=+b.dataset.i;showG();lb.showModal()}};
 $("#lb-p").onclick=()=>{gi=(gi+GAL.length-1)%GAL.length;showG()};$("#lb-n").onclick=()=>{gi=(gi+1)%GAL.length;showG()};$("#lb-x").onclick=()=>lb.close();
 lb.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")$("#lb-p").click();if(e.key==="ArrowRight")$("#lb-n").click()});
