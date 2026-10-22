@@ -62,8 +62,8 @@ nav.open{clip-path:inset(0 0 -40px 0);opacity:1;pointer-events:auto}nav a.nl{pad
 /* Views + chuyển trang */
 .view{display:none}.view.on{display:block;animation:viewIn .75s var(--e)}
 @keyframes viewIn{from{opacity:0;transform:translateY(22px) scale(.992)}to{opacity:1;transform:none}}
-.rv{opacity:0;transform:translateY(34px) scale(.97);transition:opacity .9s var(--e),transform .9s var(--e);transition-delay:var(--d,0s)}.rv.in{opacity:1;transform:none}
-.pagehead{position:relative;overflow:hidden;background:var(--hill3);color:var(--on);padding:clamp(130px,16vw,170px) 0 clamp(50px,7vw,80px)}
+.reveal-text{background:linear-gradient(90deg,var(--tx) 50%,color-mix(in srgb,var(--tx) 25%,transparent) 50%);background-size:200% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position 1.1s var(--e)}.rv.in .reveal-text,.reveal-text.in{background-position:0 0}.rv{opacity:0;transform:translateY(34px) scale(.97);transition:opacity .9s var(--e),transform .9s var(--e);transition-delay:var(--d,0s)}.rv.in{opacity:1;transform:none}
+.pagehead{background-image:linear-gradient(90deg,rgba(31,18,7,.82),rgba(31,18,7,.48)),var(--page-banner,none);background-size:cover;background-position:center;position:relative;overflow:hidden;background-color:var(--hill3);color:var(--on);padding:clamp(130px,16vw,170px) 0 clamp(50px,7vw,80px)}
 .pagehead:before,.pagehead:after{content:"";position:absolute;border-radius:50%;background:var(--ac2);opacity:.35;filter:blur(2px)}
 .pagehead:before{width:420px;height:420px;right:-120px;top:-160px;animation:drift 14s ease-in-out infinite}
 .pagehead:after{width:260px;height:260px;right:18%;bottom:-170px;background:var(--hill2);opacity:.3;animation:drift 18s ease-in-out infinite reverse}
@@ -77,12 +77,12 @@ nav.open{clip-path:inset(0 0 -40px 0);opacity:1;pointer-events:auto}nav a.nl{pad
 .pop{transform:translateZ(36px)}
 
 /* Hero */
-.hero{min-height:100svh;position:relative;display:flex;align-items:flex-end;color:var(--on);background:var(--hill3);overflow:hidden;padding:0}
+.hero{background-image:linear-gradient(180deg,rgba(31,18,7,.26),rgba(31,18,7,.2)),url("./banner-trang-chu.jpg");background-size:cover;background-position:center;min-height:100svh;position:relative;display:flex;align-items:flex-end;color:var(--on);background-color:var(--hill3);overflow:hidden;padding:0}
 .hero .countryside-image{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:hidden;background:var(--hill3)}.hero .countryside-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}.hero svg{position:absolute;inset:0;width:100%;height:100%}.ly{transition:transform .35s ease-out}
 .kite{animation:sway 7s ease-in-out infinite;transform-origin:300px 520px}
 @keyframes sway{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3.5deg) translateY(-14px)}}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,18,7,.6) 0,rgba(31,18,7,0) 24%,rgba(31,18,7,0) 42%,rgba(31,18,7,.72) 100%);pointer-events:none}
-.hero .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(90px,14vh,150px);padding-top:150px}
+.hero>svg{display:none}.hero .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(90px,14vh,150px);padding-top:150px}
 .hero h1{max-width:15ch;text-shadow:0 2px 24px rgba(31,18,7,.4)}.hero p{font-size:1.15rem}
 .hero .go>*{opacity:0;transform:translateY(26px);animation:up 1s var(--e) forwards}.hero .go>*:nth-child(2){animation-delay:.2s}.hero .go>*:nth-child(3){animation-delay:.38s}.hero .go>*:nth-child(4){animation-delay:.56s}
 @keyframes up{to{opacity:1;transform:none}}
@@ -122,7 +122,7 @@ nav.open{clip-path:inset(0 0 -40px 0);opacity:1;pointer-events:auto}nav a.nl{pad
 @media(max-width:980px){.cgrid{grid-template-columns:repeat(2,1fr)}.cgrid>*,.cgrid>*:nth-child(n+4){grid-column:span 1}.cgrid>*:last-child{grid-column:span 2}}
 @media(max-width:600px){.cgrid{grid-template-columns:1fr}.cgrid>*,.cgrid>*:last-child{grid-column:span 1}}
 .cm{display:flex;flex-direction:column;height:100%;background:var(--card);color:var(--tx);border-radius:14px;overflow:hidden;box-shadow:var(--sh);text-decoration:none}
-.cm .im{aspect-ratio:4/3;overflow:hidden}.cm .im svg,.pc .im svg{display:block;width:100%;height:100%;transition:transform 1.1s var(--e)}.cm:hover .im svg,.pc:hover .im svg{transform:scale(1.08)}
+.cm .im{aspect-ratio:4/3;overflow:hidden}.cm .im svg,.pc .im svg,.cm .im img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--e)}.cm:hover .im svg,.pc:hover .im svg,.cm:hover .im img{transform:scale(1.08)}
 .cm .bd{padding:20px 22px 24px;display:flex;flex-direction:column;gap:2px;flex:1}.cm h3{margin:10px 0 4px}.cm .hl{font-size:15px;color:var(--sub);flex:1}.cm .pr{font-weight:600;color:var(--ac2)}
 .hue,.pc h3,.pd h1{font-family:"Cormorant Garamond","Playfair Display",Georgia,serif;font-weight:700}
 h2.hue{font-size:clamp(2.2rem,4.6vw,3.4rem)}
@@ -143,7 +143,7 @@ h2.hue{font-size:clamp(2.2rem,4.6vw,3.4rem)}
 /* Combo đầy đủ (trang Tour) */
 .cbx{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(24px,5vw,60px);align-items:center;padding:clamp(28px,4vw,48px) 0;border-top:1px solid var(--line)}.cbx.rev .cmedia{order:2}
 @media(max-width:860px){.cbx{grid-template-columns:1fr}.cbx.rev .cmedia{order:0}}
-.cmedia{border-radius:14px;overflow:hidden;aspect-ratio:4/3;box-shadow:var(--sh);background:var(--sky)}.cmedia svg{display:block;width:100%;height:100%}
+.cmedia{border-radius:14px;overflow:hidden;aspect-ratio:4/3;box-shadow:var(--sh);background:var(--sky)}.cmedia svg,.cmedia img{display:block;width:100%;height:100%;object-fit:cover}
 .cbx h3{font-size:1.8rem;margin:6px 0}.cbx .hlx{font-weight:600;margin-bottom:10px}.cbx .big{font:700 1.5rem "Playfair Display",serif;color:var(--ac2);margin:8px 0 14px}
 .dd{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--card);overflow:hidden}.dd summary{cursor:pointer;font-weight:600;padding:12px 16px;list-style:none;display:flex;justify-content:space-between;gap:12px;color:var(--ac2)}.dd summary::-webkit-details-marker{display:none}.dd summary:after{content:"+";font-size:22px;line-height:1;transition:transform .45s var(--e)}.dd[open] summary:after{transform:rotate(135deg)}
 .dd .db{padding:0 16px 14px;animation:dopen .55s var(--e)}.dd .db p{margin:0 0 8px;font-size:15px}
@@ -220,7 +220,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <header id="hd"><div class="bar">
 <a class="logo" href="#/">CHẠM MÂY TRAVEL</a>
 <nav id="nav" aria-label="Điều hướng chính">
-<a class="nl" href="#/" data-r="/">Trang chủ</a><a class="nl" href="#/tour" data-r="/tour">Tour 3N2Đ</a><a class="nl" href="#/ca-nhan" data-r="/ca-nhan">Du lịch cá nhân</a><a class="nl" href="#/ve-cham-may" data-r="/ve-cham-may">Về Chạm Mây</a><a class="nl" href="#/kham-pha-hue" data-r="/kham-pha-hue">Khám phá Huế</a><button type="button" id="sb" class="sbtn" aria-label="Tìm kiếm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg></button>
+<a class="nl" href="#/" data-r="/">Trang chủ</a><a class="nl" href="#/tour" data-r="/tour">Tour 3N2Đ</a><a class="nl" href="#/ca-nhan" data-r="/ca-nhan">Du lịch cá nhân</a><a class="nl" href="#/ve-cham-may" data-r="/ve-cham-may">Về Chạm Mây</a><a class="nl" href="#/kham-pha-hue" data-r="/kham-pha-hue">Khám phá Huế</a><a class="nl" href="#/cam-nang" data-r="/cam-nang">Cẩm nang du lịch</a><button type="button" id="sb" class="sbtn" aria-label="Tìm kiếm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg></button>
 <a class="btn mob" href="#/lien-he" data-r="/lien-he">Liên hệ</a>
 </nav>
 <div class="rt"><a class="btn" href="#/lien-he" data-r="/lien-he">Liên hệ</a><button id="burger" aria-expanded="false" aria-controls="nav" aria-label="Mở menu"><i></i><i></i><i></i></button></div>
@@ -328,6 +328,11 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <section><div class="wrap"><p class="note rv" style="text-align:center;margin-inline:auto">Ảnh thật sẽ được bổ sung sau; bản này dùng hình minh họa tạm.</p><div class="pgrid rvg" id="places" style="margin-top:20px"></div>
 <h2 class="rv" style="margin-top:70px;text-align:center">Huế theo cách của bạn</h2><div class="chips rv" style="justify-content:center"><a class="chip" href="#/ca-nhan">Văn hóa: Đại Nội</a><a class="chip" href="#/ca-nhan">Làng quê: làm nông, bắt cá</a><a class="chip" href="#/ca-nhan">Ẩm thực: bữa cơm quê</a><a class="chip" href="#/ca-nhan">Nghệ thuật: tranh dân gian</a><a class="chip" href="#/ca-nhan">Thư giãn: sông Hương</a></div></div></section></div>
 
+<!-- CẨM NANG DU LỊCH -->
+<div class="view" data-v="/cam-nang">
+<div class="pagehead" style="--page-banner:url('./banner-kham-pha-hue.jpg')"><div class="wrap"><h1>Cẩm nang du lịch Huế</h1><p>Kinh nghiệm chuẩn bị hành lý, chọn thời điểm, khám phá ẩm thực và trải nghiệm Huế theo nhịp chậm.</p></div></div>
+<section><div class="wrap"><div class="shead rv"><h2>Đi Huế có chuẩn bị</h2><p>Những bài viết ngắn giúp bạn lên kế hoạch dễ dàng hơn. Đây là nội dung mẫu ban đầu, có thể bổ sung và cập nhật dần.</p></div><div class="pgrid rvg" id="guides"></div></div></section></div>
+
 <!-- TRANG CON ĐỊA ĐIỂM -->
 <div class="view" data-v="/place"><div class="pd"><div class="wrap" id="place-box"></div></div></div>
 
@@ -359,7 +364,7 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 
 <footer><div class="wrap"><div class="cols">
 <div><h3>CHẠM MÂY TRAVEL</h3><p>Chạm vào miền ký ức, tìm về những điều nguyên bản.</p><h3 class="soc-h">Mạng xã hội</h3><div id="f-social" class="soc-list"></div></div>
-<div><h3>Khám phá</h3><ul><li><a href="#/">Trang chủ</a></li><li><a href="#/ca-nhan">Du lịch cá nhân</a></li><li><a href="#/ve-cham-may">Về Chạm Mây</a></li><li><a href="#/kham-pha-hue">Khám phá Huế</a></li><li><a href="#/danh-gia">Đánh giá</a></li><li><a href="#/lien-he">Liên hệ</a></li></ul></div>
+<div><h3>Khám phá</h3><ul><li><a href="#/">Trang chủ</a></li><li><a href="#/ca-nhan">Du lịch cá nhân</a></li><li><a href="#/ve-cham-may">Về Chạm Mây</a></li><li><a href="#/kham-pha-hue">Khám phá Huế</a></li><li><a href="#/cam-nang">Cẩm nang du lịch</a></li><li><a href="#/danh-gia">Đánh giá</a></li><li><a href="#/lien-he">Liên hệ</a></li></ul></div>
 <div><h3>Hành trình</h3><ul id="f-combos"></ul></div>
 <div><h3>Chính sách</h3><ul id="f-pol"></ul></div>
 <div><h3>Nhận tin</h3><form id="news"><label class="f" style="color:var(--on)">Email<input type="email" id="n-mail" style="background:var(--bg)"></label><button class="btn" style="margin-top:8px" type="submit">Đăng ký</button><div id="n-out" role="status" style="margin-top:8px;font-size:14px"></div></form></div>
@@ -380,7 +385,28 @@ footer a.soc svg{width:18px;height:18px;flex:none}
 <script>
 const CONTACT={email:"[email — cần bổ sung]",tel:"[số điện thoại — cần bổ sung]",addr:"[địa chỉ — cần bổ sung]",fb:"[fanpage — cần bổ sung]"};
 /* Dán link ảnh thật vào đây theo mã địa điểm, ví dụ IMG["dai-noi"]="https://.../dai-noi.jpg". Để trống thì dùng hình minh họa tạm. */
-const IMG={};
+const IMG={
+  "dai-noi":"./tham-quan-dai-noi-hue.jpg",
+  "truong-tien-song-huong":"./dao-cau-truong-tien-va-song-huong.jpg",
+  "cho-dong-ba":"./kham-pha-cho-dong-ba.jpg",
+  "cau-ngoi-thanh-toan":"./cau-ngoi-thanh-toan.jpg",
+  "cho-que":"./kham-pha-cho-que.jpg",
+  "lam-nong":"./trai-nghiem-lam-nong-theo-mua.jpg",
+  "bat-ca":"./trai-nghiem-bat-ca-cung-nguoi-dan.jpg",
+  "com-que":"./di-cho-va-nau-com-que.jpg",
+  "tro-choi-dan-gian":"./choi-tro-choi-dan-gian.jpg",
+  "tha-dieu":"./tu-tay-trang-tri-va-tha-dieu.jpg",
+  "thu-cong":"./lam-hoa-giay-tranh-dan-gian-do-thu-cong.jpg",
+  "ke-chuyen-tuoi-tho":"./nghe-ke-chuyen-tuoi-tho.jpg",
+  "buu-thiep-gui-mot-the-he":"./viet-buu-thiep-gui-mot-the-he.jpg",
+  "am-thuc-hue":"./thuong-thuc-am-thuc-dac-san-hue.jpeg",
+  "thuyen-rong-ca-hue":"./di-thuyen-rong-va-nghe-ca-hue-tren-song-huong.jpg",
+  "home":"./banner-trang-chu.jpg",
+  "tour":"./banner-tour-3n2d.jpg",
+  "personal":"./banner-du-lich-ca-nhan.jpg",
+  "about":"./banner-ve-cham-may.jpg",
+  "explore":"./banner-kham-pha-hue.jpg"
+};
 const GROUPS={A:"Khám phá Huế",B:"Tuổi thơ làng quê",C:"Trò chơi dân gian",D:"Sáng tạo và kết nối"};
 const TAGS={"lang-que":"Làng quê","tro-choi":"Trò chơi dân gian","thu-cong":"Thủ công","am-thuc":"Ẩm thực","ket-noi":"Kết nối thế hệ"};
 /* ================= MẠNG XÃ HỘI: chỉnh URL tại đây =================
@@ -558,11 +584,18 @@ const POLS=[
 const polBy=Object.fromEntries(POLS.map(p=>[p.s,p]));
 
 /* Render chung */
-const cardMini=(c,i)=>`<a class="cm tilt" data-t="6" href="#/tour/${c.id}"><div class="im pop">${scene(c.sc,i)}</div><div class="bd"><span class="pr">Giá ước tính: ${rng(c.p[0],c.p[1])}/người</span><h3>${c.n}</h3><p class="hl">${c.hl}</p></div></a>`;
+const cardMini=(c,i)=>`<a class="cm tilt" data-t="6" href="#/tour/${c.id}"><div class="im pop">${pic(({"lang-que":"cau-ngoi-thanh-toan","ve-tuoi-tho":"tro-choi-dan-gian","ky-uc":"thu-cong","huong-vi":"am-thuc-hue","ket-noi":"ke-chuyen-tuoi-tho"})[c.id]||"cau-ngoi-thanh-toan",c.sc,i)}</div><div class="bd"><span class="pr">Giá ước tính: ${rng(c.p[0],c.p[1])}/người</span><h3>${c.n}</h3><p class="hl">${c.hl}</p></div></a>`;
 const placeCard=(p,i)=>`<a class="pc tilt" data-t="6" href="#/kham-pha-hue/${p.s}"><div class="im">${pic(p.s,p.k,i)}</div><div class="bd"><h3>${p.n}</h3><p>${p.d}</p><span class="more">Đọc bài giới thiệu</span></div></a>`;
 $("#home-combos").innerHTML=COMBOS.map(cardMini).join("");
 $("#home-hue").innerHTML=["dai-noi","truong-tien-song-huong","cau-ngoi-thanh-toan","lam-nong","tha-dieu","thuyen-rong-ca-hue"].map(s=>placeCard(pById[s],PLACES.indexOf(pById[s]))).join("");
 $("#places").innerHTML=PLACES.map(placeCard).join("");
+const GUIDES=[
+ {id:"thoi-diem",title:"Nên đi Huế vào thời điểm nào?",category:"Lên kế hoạch",image:"./banner-kham-pha-hue.jpg",desc:"Gợi ý chọn mùa, chuẩn bị cho nắng nóng hoặc những cơn mưa bất chợt và sắp xếp lịch trình linh hoạt.",body:"Huế có nét đẹp riêng trong từng mùa. Trước chuyến đi, hãy kiểm tra dự báo thời tiết gần ngày khởi hành, chuẩn bị áo mưa mỏng và giày dễ đi. Nếu muốn kết hợp trải nghiệm làng quê ngoài trời, nên để lịch trình có khoảng linh hoạt để điều chỉnh theo thời tiết."},
+ {id:"hanh-ly",title:"Hành lý gọn nhẹ cho chuyến đi Huế",category:"Kinh nghiệm",image:"./banner-du-lich-ca-nhan.jpg",desc:"Danh sách vật dụng nên mang để tham quan di tích, đi bộ ven sông và trải nghiệm ngoài trời thoải mái.",body:"Ưu tiên giày đi bộ êm, nón, kem chống nắng, bình nước cá nhân, áo khoác nhẹ và áo mưa gấp gọn. Nếu tham gia hoạt động làm nông hoặc bắt cá, hãy mang thêm một bộ quần áo để thay. Bảo quản điện thoại trong túi chống nước khi ở gần ao mương."},
+ {id:"an-gi",title:"Ăn gì khi khám phá Huế?",category:"Ẩm thực",image:"./thuong-thuc-am-thuc-dac-san-hue.jpeg",desc:"Bắt đầu hành trình ẩm thực từ chợ địa phương, món ăn đặc sản đến bữa cơm quê cùng người dân.",body:"Dành thời gian thử các món đặc sản tại những quán địa phương và ghé chợ Đông Ba để cảm nhận nhịp sống thường ngày. Nếu có dị ứng thực phẩm hoặc chế độ ăn riêng, hãy hỏi thành phần món ăn và báo trước cho đơn vị tổ chức. Giá món ăn thay đổi theo địa điểm và lựa chọn của mỗi người."},
+ {id:"di-cham",title:"Khám phá Huế theo nhịp sống chậm",category:"Trải nghiệm",image:"./dao-cau-truong-tien-va-song-huong.jpg",desc:"Đừng chỉ ghé thật nhiều điểm: hãy dành thời gian đi bộ, trò chuyện và quan sát cuộc sống bên sông Hương.",body:"Một lịch trình vừa phải sẽ giúp bạn có thời gian ngồi lại bên sông Hương, tìm hiểu câu chuyện của người dân và thưởng thức món ăn địa phương. Bạn có thể kết hợp các điểm di tích trong trung tâm với một ngày trải nghiệm ở làng Thanh Toàn. Hãy kiểm tra giờ mở cửa và điều kiện hoạt động trước khi đi."}
+];
+$("#guides").innerHTML=GUIDES.map((g,i)=>`<article class="pc guide-card"><div class="im"><img src="${g.image}" alt="${g.title}" loading="lazy"></div><div class="bd"><span class="pill">${g.category}</span><h3>${g.title}</h3><p>${g.desc}</p><details class="dd"><summary>Đọc kinh nghiệm</summary><div class="db"><p>${g.body}</p><a class="more" href="#/kham-pha-hue">Khám phá các địa điểm Huế</a></div></details></div></article>`).join("");
 $("#about-art").innerHTML=scene("farm",2);
 /* Bưu thiếp tự viết */
 (()=>{const fl=$("#flip"),front=$("#flip-f"),msg=$("#pc-msg"),to=$("#pc-to"),from=$("#pc-from"),hint=$("#pc-hint"),rs=$("#pc-reset");let photo=null,url=null;const H0=hint.textContent;
@@ -595,7 +628,7 @@ cv.toBlob(b=>{if(!b){note("Không tạo được ảnh, hãy thử lại.");retu
 
 /* Trang Tour */
 let cf="",openId="";
-function comboFull(c,i){return `<article class="cbx ${i%2?"rev":""}" id="cb-${c.id}"><div class="cmedia tilt" data-t="6">${scene(c.sc,i)}</div><div><span class="pill">Combo ${COMBOS.indexOf(c)+1}</span><h3>${c.n}</h3><p style="margin-bottom:4px">${c.t}</p><p class="hlx">Hoạt động nổi bật: ${c.hl}</p><div class="big">${rng(c.p[0],c.p[1])}/người</div><div>${c.days.map((d,k)=>`<details class="dd"${k===0||openId===c.id?" open":""}><summary>Ngày ${k+1} – ${d.t}</summary><div class="db"><ul class="dl">${d.a.map(x=>`<li>${x}</li>`).join("")}</ul><div class="chips">${d.ids.map(x=>`<span class="chip">${byId[x].n}</span>`).join("")}</div></div></details>`).join("")}<p class="cnote">${CNOTE}</p></div><div class="btns" style="margin-top:16px"><button class="btn use" data-c="${c.id}">Dùng làm lịch trình của tôi</button><a class="btn" href="#/lien-he" data-ask="${c.id}" data-type="book">Đặt tour</a><a class="btn ghost dk" href="#/lien-he" data-ask="${c.id}">Hỏi tư vấn</a></div></div></article>`}
+function comboFull(c,i){return `<article class="cbx ${i%2?"rev":""}" id="cb-${c.id}"><div class="cmedia tilt" data-t="6">${pic(({"lang-que":"cau-ngoi-thanh-toan","ve-tuoi-tho":"tro-choi-dan-gian","ky-uc":"thu-cong","huong-vi":"am-thuc-hue","ket-noi":"ke-chuyen-tuoi-tho"})[c.id]||"cau-ngoi-thanh-toan",c.sc,i)}</div><div><span class="pill">Combo ${COMBOS.indexOf(c)+1}</span><h3>${c.n}</h3><p style="margin-bottom:4px">${c.t}</p><p class="hlx">Hoạt động nổi bật: ${c.hl}</p><div class="big">${rng(c.p[0],c.p[1])}/người</div><div>${c.days.map((d,k)=>`<details class="dd"${k===0||openId===c.id?" open":""}><summary>Ngày ${k+1} – ${d.t}</summary><div class="db"><ul class="dl">${d.a.map(x=>`<li>${x}</li>`).join("")}</ul><div class="chips">${d.ids.map(x=>{const dest=({dainoi:"dai-noi",dongba:"cho-dong-ba",huong:"truong-tien-song-huong",ngoi:"cau-ngoi-thanh-toan",chole:"cho-que",nong:"lam-nong",cabat:"bat-ca",comque:"com-que",tra:"ke-chuyen-tuoi-tho",oan:"tro-choi-dan-gian",day:"tro-choi-dan-gian",keo:"tro-choi-dan-gian",de:"tro-choi-dan-gian",bao:"tro-choi-dan-gian",dieu:"tha-dieu",tc:"thu-cong",tranh:"thu-cong",banh:"am-thuc-hue",thuyen:"thuyen-rong-ca-hue",gl:"ke-chuyen-tuoi-tho",bt:"buu-thiep-gui-mot-the-he",amthuc:"am-thuc-hue"})[x];const place=PLACES.find(p=>p.s===dest);return `<a class="chip activity-chip" href="#/kham-pha-hue/${dest}" title="Xem ${place?place.n:byId[x].n} trong Khám phá Huế">${byId[x].n} ↗</a>`}).join("")}</div></div></details>`).join("")}<p class="cnote">${CNOTE}</p></div><div class="btns" style="margin-top:16px"><button class="btn use" data-c="${c.id}">Dùng làm lịch trình của tôi</button><a class="btn" href="#/lien-he" data-ask="${c.id}" data-type="book">Đặt tour</a><a class="btn ghost dk" href="#/lien-he" data-ask="${c.id}">Hỏi tư vấn</a></div></div></article>`}
 function renderCombos(){const l=COMBOS.filter(c=>!cf||c.tag===cf);$("#combos").innerHTML=l.map((c,i)=>comboFull(c,COMBOS.indexOf(c))).join("");$("#cnone").hidden=l.length>0;$$("#combos .cbx").forEach(e=>e.classList.add("rv"));rvScan($('.view[data-v="/tour"]'))}
 $("#cf").innerHTML=[["","Tất cả"],...Object.entries(TAGS)].map(([v,l])=>`<button type="button" data-v="${v}" aria-pressed="${v===cf}">${l}</button>`).join("");
 $("#cf").onclick=e=>{const b=e.target.closest("button");if(!b)return;cf=b.dataset.v;$$("#cf button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderCombos()};
@@ -721,7 +754,7 @@ $("#news").onsubmit=async e=>{
 
 /* Tìm kiếm, thư viện ảnh, đánh giá */
 const nz=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").toLowerCase();
-const IDX=[...A.map(a=>({n:a.n,k:"Hoạt động: "+GROUPS[a.g],r:"/ca-nhan",t:a.n+" "+a.d+" "+GROUPS[a.g]})),...COMBOS.map(c=>({n:c.n,k:"Combo · "+rng(c.p[0],c.p[1]),r:"/tour/"+c.id,t:c.n+" "+c.t+" "+c.hl})),...PLACES.map(p=>({n:p.n,k:"Khám phá Huế",r:"/kham-pha-hue/"+p.s,t:p.n+" "+p.d})),...POLS.map(p=>({n:p.n,k:"Chính sách",r:"/chinh-sach/"+p.s,t:p.n+" "+p.i}))];
+const IDX=[...A.map(a=>({n:a.n,k:"Hoạt động: "+GROUPS[a.g],r:"/ca-nhan",t:a.n+" "+a.d+" "+GROUPS[a.g]})),...COMBOS.map(c=>({n:c.n,k:"Combo · "+rng(c.p[0],c.p[1]),r:"/tour/"+c.id,t:c.n+" "+c.t+" "+c.hl})),...PLACES.map(p=>({n:p.n,k:"Khám phá Huế",r:"/kham-pha-hue/"+p.s,t:p.n+" "+p.d})),...GUIDES.map(g=>({n:g.title,k:"Cẩm nang du lịch",r:"/cam-nang",t:g.title+" "+g.desc+" "+g.body})),...POLS.map(p=>({n:p.n,k:"Chính sách",r:"/chinh-sach/"+p.s,t:p.n+" "+p.i}))];
 const sd=$("#sd");$("#sb").onclick=()=>{sd.showModal();$("#sq").focus()};$("#sx").onclick=()=>sd.close();
 $("#sq").oninput=()=>{const q=nz($("#sq").value.trim()),o=$("#sr");if(!q){o.innerHTML='<p class="note">Thử: ô ăn quan, thả diều, Đại Nội, làng quê, hoàn tiền.</p>';return}const r=IDX.filter(x=>nz(x.t).includes(q)).slice(0,12);o.innerHTML=r.length?r.map(x=>`<a class="sri" href="#${x.r}">${x.n}<small>${x.k}</small></a>`).join(""):'<p>Không tìm thấy. Thử “làng quê”, “trò chơi” hoặc “Huế”.</p>'};
 $("#sr").onclick=e=>{if(e.target.closest("a"))sd.close()};
@@ -761,7 +794,7 @@ $("#pol-body").innerHTML=`<div class="msg rv" style="margin-top:0">Nội dung th
 
 /* Hiệu ứng: hiện dần khi cuộn */
 const io="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1,rootMargin:"0px 0px -6% 0px"}):null;
-function rvScan(view){$$(".rvg",view).forEach(g=>[...g.children].forEach((c,i)=>{c.classList.add("rv");c.style.setProperty("--d",(i%6)*.09+"s")}));
+function rvScan(view){$$(".rv h2,.rv h1,.rv h3",view).forEach(h=>h.classList.add("reveal-text"));$$(".rvg",view).forEach(g=>[...g.children].forEach((c,i)=>{c.classList.add("rv");c.style.setProperty("--d",(i%6)*.09+"s")}));
 $$(".rv",view).forEach(el=>{el.classList.remove("in");if(io){io.unobserve(el);requestAnimationFrame(()=>io.observe(el))}else el.classList.add("in")})}
 
 /* Hiệu ứng 3D: nghiêng thẻ theo con trỏ */
@@ -787,9 +820,10 @@ if(k==="/chinh-sach"){if(polBy[arg])k="/policy";else{location.replace("#/");retu
 if(k==="/tour"&&arg&&!COMBOS.find(c=>c.id===arg))arg="";
 if(!$(`.view[data-v="${k}"]`)){k="/";arg=""}
 const nk=k==="/place"?"/kham-pha-hue":k==="/policy"?"":k;
+
 if(k==="/place")renderPlace(arg);if(k==="/policy")renderPolicy(arg);if(k==="/tour"){if(arg)cf="",openId=arg,$$("#cf button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===""));renderCombos()}if(k==="/ca-nhan"){renderPlan();renderLive()}if(k==="/danh-gia")renderRv();
 prog.classList.remove("go");void prog.offsetWidth;prog.classList.add("go");
-const view=$(`.view[data-v="${k}"]`);$$(".view").forEach(v=>v.classList.toggle("on",v===view));
+const view=$(`.view[data-v="${k}"]`);const bannerMap={"/tour":"./banner-tour-3n2d.jpg","/ca-nhan":"./banner-du-lich-ca-nhan.jpg","/ve-cham-may":"./banner-ve-cham-may.jpg","/kham-pha-hue":"./banner-kham-pha-hue.jpg","/cam-nang":"./banner-kham-pha-hue.jpg"};const ph=view.querySelector(".pagehead");if(ph&&bannerMap[k])ph.style.setProperty("--page-banner",`url("${bannerMap[k]}")`);$$(".view").forEach(v=>v.classList.toggle("on",v===view));
 $$("#hd a[data-r]").forEach(a=>{if(a.dataset.r===nk)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
 nav.classList.remove("open");bg.setAttribute("aria-expanded","false");window.scrollTo({top:0,behavior:"instant"});hd.classList.toggle("solid",k!=="/"||scrollY>20);
 document.title=(k==="/"?"":k==="/place"?pById[arg].n+" — ":k==="/policy"?polBy[arg].n+" — ":$(".pagehead h1",view).textContent+" — ")+"Chạm Mây Travel";
