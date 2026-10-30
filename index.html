@@ -358,11 +358,64 @@ input,select,textarea,button{max-width:100%;touch-action:manipulation}
   background-clip: border-box !important;
   -webkit-text-fill-color: var(--on) !important;
 }
+
+/* ===== Logo thương hiệu (header, footer, góc ảnh) ===== */
+.brand-logo{display:none;flex:none;border-radius:50%;object-fit:cover;background:var(--card)}
+.has-logo .brand-logo{display:block}
+.logo{display:inline-flex;align-items:center;gap:10px}
+.logo span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo .brand-logo{width:46px;height:46px;box-shadow:0 0 0 2px rgba(242,235,223,.78),0 6px 14px -6px rgba(0,0,0,.45);transition:width .45s var(--e),height .45s var(--e),box-shadow .45s}
+header.solid .logo .brand-logo{width:40px;height:40px;box-shadow:0 0 0 1.5px var(--line)}
+.footer-logo{width:76px;height:76px;margin:0 0 14px;box-shadow:0 0 0 2px rgba(242,235,223,.5)}
+.wm-logo{display:none;position:absolute;z-index:3;right:10px;bottom:10px;width:38px;height:38px;border-radius:50%;background:var(--logo-url,none) center/cover no-repeat;box-shadow:0 0 0 1.5px rgba(242,235,223,.85),0 4px 10px rgba(0,0,0,.35);opacity:.93;pointer-events:none}
+.has-logo .wm-logo{display:block}
+.cm .im,.pc .im,.cmedia,.pimg{position:relative}
+.hero .wm-logo{right:clamp(20px,4vw,40px);bottom:178px;width:64px;height:64px}
+.pagehead .wm-logo{right:clamp(16px,3vw,36px);bottom:18px;width:54px;height:54px}
+.pagehead:not([style*="--page-banner"]) .wm-logo{display:none!important}
+@media(max-width:800px){.hero .wm-logo{right:16px;bottom:18px;width:48px;height:48px}.pagehead .wm-logo{width:44px;height:44px;right:14px;bottom:14px}}
+@media(max-width:600px){.logo .brand-logo{width:38px;height:38px}header.solid .logo .brand-logo{width:34px;height:34px}.logo{gap:8px}.footer-logo{width:64px;height:64px}}
+/* Giãn dòng chữ trên banner (trước đây dòng quá sát nhau) */
+.hero h1,.pagehead h1{line-height:1.32;letter-spacing:.005em;margin-bottom:.55em}
+.hero p,.pagehead p{line-height:1.85}
+.pagehead .note{line-height:1.7}
+/* Dòng giới thiệu đề tài ở footer */
+.fb-note{flex:1 0 100%;order:5;margin:6px 0 0;padding-top:14px;border-top:1px dashed rgba(242,235,223,.22);font-size:12px;line-height:1.75;letter-spacing:.02em;text-align:center;opacity:.85;max-width:none}
+/* ===== Tin tức & thời tiết (trang chủ) ===== */
+.news{border-top:1px solid var(--line)}
+.news-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:clamp(18px,3vw,32px);align-items:start}
+@media(max-width:900px){.news-grid{grid-template-columns:minmax(0,1fr)}}
+.wx{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,28px);box-shadow:var(--sh);position:sticky;top:96px}
+@media(max-width:900px){.wx{position:static}}
+.wx-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}.wx-top h3{margin:0}
+.wx-date{font-size:14px;color:var(--sub)}
+.wx-now{display:flex;align-items:center;gap:16px;margin:6px 0 12px}
+.wx-ic{width:64px;height:64px;flex:none;color:var(--ac)}
+.wx-t{font:700 clamp(2.6rem,6vw,3.4rem)/1.1 "Playfair Display",serif;color:var(--ac2)}
+.wx-c{font-weight:600}
+.wx-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;margin:0 0 14px;font-size:14.5px}
+.wx-stats div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding:5px 0}.wx-stats dt{color:var(--sub)}.wx-stats dd{margin:0;font-weight:600;text-align:right}
+.wx-days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 14px}
+.wx-day{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center;font-size:13.5px;line-height:1.5}.wx-day b{display:block;font-size:13px;color:var(--sub);font-weight:600}.wx-day span{display:block}
+.wx-tip{padding:10px 14px;border-left:4px solid var(--ac);background:var(--bg);border-radius:0 8px 8px 0;font-size:14.5px;margin:0 0 12px}
+.wx-src{margin:10px 0 0}.wx-src a,.news-note a{text-underline-offset:3px}
+.wx-load{margin:0;animation:none}
+@media(prefers-reduced-motion:no-preference){.wx-load{animation:wxp 1.4s ease-in-out infinite}@keyframes wxp{50%{opacity:.4}}}
+.news-list{display:grid;gap:14px}
+.ncard{display:grid;gap:4px;text-decoration:none;color:var(--tx);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;transition:transform .5s var(--e),box-shadow .5s var(--e),border-color .3s}
+.ncard:hover,.ncard:focus-visible{transform:translateY(-4px);box-shadow:var(--sh);border-color:var(--ac)}
+.ncard .nt{justify-self:start;background:var(--ac);color:var(--on);padding:2px 12px;border-radius:99px;font-size:13px;font-weight:600}
+.ncard h3{font-size:1.2rem;margin:6px 0 2px;line-height:1.4}
+.ncard p{margin:0;font-size:15px;color:var(--sub);line-height:1.7;max-width:none}
+.ncard .ns{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13.5px;font-weight:600;color:var(--ac2)}
+.ncard .ns:after{content:"↗";transition:transform .45s var(--e)}.ncard:hover .ns:after{transform:translate(4px,-4px)}
+.news-note{text-align:center;margin:26px auto 0;max-width:70ch}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 </head>
 <body>
 <header id="hd"><div class="bar">
-<a class="logo" href="#/">CHẠM MÂY TRAVEL</a>
+<a class="logo" href="#/" aria-label="Chạm Mây Travel, về trang chủ"><img class="brand-logo" width="46" height="46" alt="" decoding="async"><span>CHẠM MÂY TRAVEL</span></a>
 <nav id="nav" aria-label="Điều hướng chính">
 <a class="nl" href="#/" data-r="/">Trang chủ</a><a class="nl" href="#/tour" data-r="/tour">Tour 3N2Đ</a><a class="nl" href="#/ca-nhan" data-r="/ca-nhan">Du lịch cá nhân</a><a class="nl" href="#/ve-cham-may" data-r="/ve-cham-may">Về Chạm Mây</a><a class="nl" href="#/kham-pha-hue" data-r="/kham-pha-hue">Khám phá Huế</a><a class="nl" href="#/cam-nang" data-r="/cam-nang">Cẩm nang du lịch</a><button type="button" id="sb" class="sbtn" aria-label="Tìm kiếm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg></button>
 <a class="btn mob" href="#/lien-he" data-r="/lien-he">Liên hệ</a>
@@ -386,7 +439,6 @@ input,select,textarea,button{max-width:100%;touch-action:manipulation}
 <div class="wrap go">
 <h1>Có những miền ký ức, chỉ cần một chuyến đi để trở về.</h1>
 <p>Cùng Chạm Mây khám phá Huế theo một cách khác — chậm hơn, sâu hơn và gần gũi hơn với những điều bình dị làm nên tuổi thơ.</p>
-<p class="note" style="color:var(--on)">Slow travel · Local culture · Meaningful memories</p>
 <div class="btns"><a class="btn" href="#/tour">Khám phá hành trình</a><a class="btn ghost" href="#/ca-nhan">Tự thiết kế chuyến đi</a></div>
 </div><div class="scrollhint" aria-hidden="true">Cuộn xuống</div></section>
 
@@ -417,6 +469,17 @@ input,select,textarea,button{max-width:100%;touch-action:manipulation}
 <div class="st3"><div class="nb">3</div><h3>Mang ký ức trở về</h3><p>Viết “Bưu thiếp gửi một thế hệ”, chia sẻ và tổng kết hành trình.</p></div></div></div></section>
 
 <section style="background:var(--card)"><div class="wrap"><div class="shead rv"><h2 class="hue">Khám phá Huế</h2><p>Những trải nghiệm tiêu biểu trong hành trình của Chạm Mây. Chạm vào từng thẻ để đọc bài giới thiệu.</p></div><div class="pgrid rvg" id="home-hue"></div><div style="text-align:center;margin-top:40px" class="rv"><a class="btn" href="#/kham-pha-hue">Xem tất cả địa điểm</a></div></div></section>
+
+<section id="tin-tuc" class="news" aria-labelledby="news-h"><div class="wrap">
+<div class="shead rv"><h2 id="news-h">Tin tức &amp; thông tin chuyến đi Huế</h2><p>Thời tiết Huế hôm nay và những bài viết đáng đọc từ các trang thông tin bên ngoài, giúp bạn chuẩn bị tốt hơn cho chuyến đi.</p></div>
+<div class="news-grid">
+<article class="wx rv" aria-labelledby="wx-h"><div class="wx-top"><h3 id="wx-h">Thời tiết Huế hôm nay</h3><span class="wx-date" id="wx-date"></span></div>
+<div id="wx-body" class="wx-body" aria-live="polite"><p class="note wx-load">Đang tải thời tiết…</p></div>
+<p class="note wx-src">Dữ liệu: <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo.com</a>. Chỉ mang tính tham khảo, hãy kiểm tra lại dự báo chính thức trước khi khởi hành.</p></article>
+<div class="news-list rvg" id="news-list"></div>
+</div>
+<p class="note rv news-note">Các bài viết thuộc quyền của trang nguồn, mở ở tab mới. Chạm Mây chỉ giới thiệu để bạn tham khảo, không sở hữu và không chịu trách nhiệm về nội dung bên ngoài.</p>
+</div></section>
 
 <section><div class="wrap why"><div class="rv"><h2>Vì sao chọn Chạm Mây?</h2><p>Chúng mình làm du lịch để bạn ngồi lại lâu hơn, nghe nhiều hơn và mang về những điều không mua được.</p><a class="btn ghost dk" href="#/ve-cham-may">Về Chạm Mây</a></div>
 <ul class="values rvg">
@@ -511,11 +574,11 @@ input,select,textarea,button{max-width:100%;touch-action:manipulation}
 <dialog id="lb" aria-label="Xem ảnh"><div id="lb-i"></div><p id="lb-c" class="note"></p><div class="btns"><button class="btn ghost dk" type="button" id="lb-p">Ảnh trước</button><button class="btn ghost dk" type="button" id="lb-n">Ảnh sau</button><button class="btn" type="button" id="lb-x">Đóng</button></div></dialog>
 
 <footer><div class="wrap"><div class="cols">
-<div class="footer-brand"><h3>CHẠM MÂY TRAVEL</h3><p>Chạm vào miền ký ức, tìm về những điều nguyên bản.</p><h3>Liên hệ</h3><ul class="footer-contact"><li><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><a href="https://www.google.com/maps/search/?api=1&query=79+Duong+Ho+Tung+Mau+Tu+Liem+Ha+Noi" target="_blank" rel="noopener noreferrer">79 Đ. Hồ Tùng Mậu, Từ Liêm, Hà Nội</a></li><li><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><a href="mailto:chammaytravel@gmail.com">chammaytravel@gmail.com</a></li><li><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l2 5-2 1.5a15 15 0 0 0 4.5 4.5L16 12l5 2v3c0 1.1-.9 2-2 2C10 19 5 14 5 5c0-1.1.9-2 2-2Z"/></svg><a href="tel:0967760589">0967 760 589</a></li></ul><h3 class="soc-h">Mạng xã hội</h3><div id="f-social" class="soc-list"></div></div>
+<div class="footer-brand"><img class="brand-logo footer-logo" width="76" height="76" alt="Logo Chạm Mây Travel" loading="lazy" decoding="async"><h3>CHẠM MÂY TRAVEL</h3><p>Chạm vào miền ký ức, tìm về những điều nguyên bản.</p><h3>Liên hệ</h3><ul class="footer-contact"><li><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><a href="https://www.google.com/maps/search/?api=1&query=79+Duong+Ho+Tung+Mau+Tu+Liem+Ha+Noi" target="_blank" rel="noopener noreferrer">79 Đ. Hồ Tùng Mậu, Từ Liêm, Hà Nội</a></li><li><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><a href="mailto:chammaytravel@gmail.com">chammaytravel@gmail.com</a></li><li><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l2 5-2 1.5a15 15 0 0 0 4.5 4.5L16 12l5 2v3c0 1.1-.9 2-2 2C10 19 5 14 5 5c0-1.1.9-2 2-2Z"/></svg><a href="tel:0967760589">0967 760 589</a></li></ul><h3 class="soc-h">Mạng xã hội</h3><div id="f-social" class="soc-list"></div></div>
 <div><h3>Khám phá</h3><ul><li><a href="#/">Trang chủ</a></li><li><a href="#/ca-nhan">Du lịch cá nhân</a></li><li><a href="#/ve-cham-may">Về Chạm Mây</a></li><li><a href="#/kham-pha-hue">Khám phá Huế</a></li><li><a href="#/cam-nang">Cẩm nang du lịch</a></li><li><a href="#/danh-gia">Đánh giá</a></li><li><a href="#/lien-he">Liên hệ</a></li></ul></div>
 <div><h3>Chính sách</h3><ul id="f-pol"></ul></div>
 <div><h3>Nhận tin</h3><form id="news"><label class="f" style="color:var(--on)">Email<input type="email" id="n-mail" style="background:var(--bg)"></label><button class="btn" style="margin-top:8px" type="submit">Đăng ký</button><div id="n-out" role="status" style="margin-top:8px;font-size:14px"></div></form></div>
-</div><div class="fb"><p>© <span id="yr"></span> CHẠM MÂY TRAVEL. All rights reserved.</p><p>Slow travel · Local culture · Meaningful memories</p></div></div></footer>
+</div><div class="fb"><p>© <span id="yr"></span> CHẠM MÂY TRAVEL. All rights reserved.</p></div><p class="fb-note">ĐỀ TÀI PHỤC VỤ CHO HỌC PHẦN MARKETING SỐ CỦA SINH VIÊN, KHÔNG CÓ XUNG ĐỘT VỀ NỘI DUNG CŨNG NHƯ TRANH CHẤP VỚI CÁC THƯƠNG HIỆU, MỤC TIÊU PHI LỢI NHUẬN.</p></div></footer>
 
 <!-- Supabase JS v2 -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -532,6 +595,19 @@ input,select,textarea,button{max-width:100%;touch-action:manipulation}
 <script>
 const CONTACT={email:"chammaytravel@gmail.com",tel:"0967760589",addr:"79 Đ. Hồ Tùng Mậu, Từ Liêm, Hà Nội",fb:"https://www.facebook.com/chammaytravel"};
 /*  */
+/* ================= LOGO THƯƠNG HIỆU =================
+   Logo tròn đã tải lên cùng thư mục với index.html. Nếu biết chính xác tên file, điền vào LOGO_SRC (ví dụ "./logo-tron.png").
+   Để "" thì web tự thử một số tên/đuôi phổ biến (logo-tron, logo-tròn, logo; png, jpg, jpeg, webp) và chỉ hiện logo khi tìm thấy file. */
+const LOGO_SRC="";
+/* ================= TIN TỨC (trang chủ) =================
+   Mỗi bài là một đường dẫn tới trang bên ngoài (chỉ nhận https). Thêm, bớt hoặc đổi bài tại đây, không cần sửa giao diện. */
+const NEWS=[
+{tag:"Thời điểm đi",title:"Huế: thời điểm du lịch theo thời tiết và lịch lễ hội",desc:"Gợi ý nên đi Huế vào mùa nào, thời tiết từng mùa và các dịp lễ hội trong năm. Cập nhật 11/10/2026.",src:"vietnamtourism.com",url:"https://www.vietnamtourism.com/vi/hue-thoi-iem-du-lich-theo-thoi-tiet-va-lich-le-hoi"},
+{tag:"Địa điểm · Di sản",title:"Complex of Hué Monuments (Quần thể di tích Cố đô Huế)",desc:"Trang giới thiệu của UNESCO về quần thể di tích Cố đô Huế trong Danh sách Di sản Thế giới. Bài bằng tiếng Anh.",src:"whc.unesco.org",url:"https://whc.unesco.org/en/list/678/"},
+{tag:"Văn hóa",title:"Khám phá nghệ thuật Nhã nhạc cung đình Huế",desc:"Giới thiệu Nhã nhạc, loại hình âm nhạc cung đình gắn với Huế, và gợi ý nơi du khách có thể trải nghiệm. Bài bằng tiếng Anh.",src:"vietnam.travel",url:"https://vietnam.travel/vi/node/1598"},
+{tag:"Chi phí",title:"Vé tham quan di sản Huế: Đắt hay xứng đáng từng đồng?",desc:"Bài báo về mức giá vé tham quan di tích Huế, các ý kiến trái chiều và chính sách giảm giá. Đăng 15/08/2025.",src:"tuoitre.vn",url:"https://tuoitre.vn/ve-tham-quan-di-san-hue-dat-hay-xung-dang-tung-dong-20250814155742411.htm"},
+{tag:"Cẩm nang",title:"Cẩm nang du lịch Huế 2026 từ A-Z: di chuyển, ăn chơi, lưu trú...",desc:"Hướng dẫn tổng hợp về mùa đi, phương tiện, lưu trú, điểm tham quan và ẩm thực. Cập nhật 10/04/2026.",src:"vnexpress.net",url:"https://vnexpress.net/cam-nang-du-lich-hue-4126937.html"}
+];
 const IMG={
   "dai-noi":"./tham-quan-dai-noi-hue.jpg",
   "truong-tien-song-huong":"./dao-cau-truong-tien-va-song-huong.jpg",
@@ -1070,6 +1146,49 @@ rvScan(view);
 if(k==="/tour"&&arg)setTimeout(()=>{const e=$("#cb-"+arg);if(e)e.scrollIntoView({behavior:"smooth",block:"start"})},350)}
 addEventListener("hashchange",route);
 addEventListener("scroll",()=>hd.classList.toggle("solid",($(".view.on")||{dataset:{}}).dataset.v!=="/"||scrollY>20),{passive:true});
+
+/* ===== Logo thương hiệu: tìm file, gắn vào header/footer và góc ảnh ===== */
+(()=>{const root=document.documentElement;
+const setLogo=src=>{root.style.setProperty("--logo-url",'url("'+src.replace(/"/g,"%22")+'")');$$(".brand-logo").forEach(i=>{i.src=src});root.classList.add("has-logo");try{sessionStorage.setItem("cm_logo",src)}catch(e){}};
+const cand=[];if(LOGO_SRC)cand.push(LOGO_SRC);else{try{const c=sessionStorage.getItem("cm_logo");if(c)cand.push(c)}catch(e){}
+["logo-tron","logo-tròn","logo tròn","logo"].forEach(n=>["png","jpg","jpeg","webp"].forEach(x=>cand.push("./"+encodeURIComponent(n)+"."+x)));cand.push("./logo-tron.svg","./logo.svg")}
+(function next(i){if(i>=cand.length)return;const im=new Image();im.onload=()=>setLogo(cand[i]);im.onerror=()=>next(i+1);im.src=cand[i]})(0);
+/* Logo ở góc các ảnh trong web (banner, thẻ combo, thẻ địa điểm, ảnh trang chi tiết) */
+const WM=".hero,.pagehead,.cm .im,.pc .im,.cmedia,.pimg";let q=0;
+const apply=()=>{$$(WM).forEach(el=>{if(el.querySelector(":scope>.wm-logo"))return;if(!el.matches(".hero,.pagehead")&&!el.querySelector("img"))return;const s=document.createElement("span");s.className="wm-logo";s.setAttribute("aria-hidden","true");el.appendChild(s)})};
+new MutationObserver(()=>{if(!q){q=1;requestAnimationFrame(()=>{q=0;apply()})}}).observe($("#main"),{childList:true,subtree:true});apply()})();
+
+/* ===== Tin tức: danh sách bài viết ngoài ===== */
+(()=>{const box=$("#news-list");if(!box)return;
+NEWS.forEach(n=>{if(!/^https:\/\//.test(n.url))return;const a=document.createElement("a"),t=document.createElement("span"),h=document.createElement("h3"),p=document.createElement("p"),s=document.createElement("span"),v=document.createElement("span");
+a.className="ncard";a.href=n.url;a.target="_blank";a.rel="noopener noreferrer";t.className="nt";t.textContent=n.tag;h.textContent=n.title;p.textContent=n.desc;s.className="ns";s.textContent="Đọc trên "+n.src;v.className="vh";v.textContent=" (mở trong tab mới)";s.append(v);a.append(t,h,p,s);box.append(a)})})();
+
+/* ===== Thời tiết Huế hôm nay (Open-Meteo, dữ liệu thật lấy khi mở trang) ===== */
+(()=>{const body=$("#wx-body");if(!body)return;
+const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e};
+const ICON={sun:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="8"/><path d="M24 5v6M24 37v6M5 24h6M37 24h6M10.6 10.6l4.2 4.2M33.2 33.2l4.2 4.2M37.4 10.6l-4.2 4.2M14.8 33.2l-4.2 4.2"/></svg>',
+cloud:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 35a8 8 0 0 1-1-15.9A10 10 0 0 1 32 16a8.5 8.5 0 0 1 2 19z"/></svg>',
+rain:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 30a8 8 0 0 1-1-15.9A10 10 0 0 1 32 11a8.5 8.5 0 0 1 2 19z"/><path d="M16 37l-2 5M25 37l-2 5M34 37l-2 5"/></svg>',
+storm:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 30a8 8 0 0 1-1-15.9A10 10 0 0 1 32 11a8.5 8.5 0 0 1 2 19z"/><path d="M25 31l-5 8h6l-3 7"/></svg>',
+fog:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M8 18h32M12 26h28M8 34h32"/></svg>'};
+/* Mã thời tiết WMO -> mô tả tiếng Việt + biểu tượng */
+const wmo=c=>c===0?["Trời quang","sun"]:c===1?["Ít mây","sun"]:c===2?["Có mây rải rác","cloud"]:c===3?["Nhiều mây","cloud"]:(c===45||c===48)?["Sương mù","fog"]:(c>=51&&c<=57)?["Mưa phùn","rain"]:(c>=61&&c<=65)?[c===61?"Mưa nhỏ":c===63?"Mưa vừa":"Mưa to","rain"]:(c===66||c===67)?["Mưa lạnh","rain"]:(c>=80&&c<=82)?[c===80?"Mưa rào nhẹ":c===81?"Mưa rào":"Mưa rào to","rain"]:(c>=95)?["Dông","storm"]:["Thời tiết thay đổi","cloud"];
+const WD=["Chủ nhật","Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy"];
+const dm=iso=>{const [y,m,d]=iso.slice(0,10).split("-").map(Number);return{d:new Date(y,m-1,d),m,dd:d}};
+const fail=()=>{body.replaceChildren();const p=el("p","note","Chưa tải được dữ liệu thời tiết lúc này. Bạn có thể xem gợi ý thời điểm đi Huế theo mùa ở bài viết bên cạnh.");body.append(p)};
+async function load(){const url="https://api.open-meteo.com/v1/forecast?latitude=16.4637&longitude=107.5909&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FBangkok&forecast_days=3";
+try{const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),9000);const r=await fetch(url,{signal:ctl.signal});clearTimeout(to);if(!r.ok)throw new Error("http");const d=await r.json();
+const c=d.current,dl=d.daily;if(!c||!dl||!dl.time||typeof c.temperature_2m!=="number")throw new Error("data");
+const [lab,ic]=wmo(c.weather_code),t0=dm(c.time);$("#wx-date").textContent=WD[t0.d.getDay()]+", "+t0.dd+"/"+t0.m;
+const now=el("div","wx-now"),icn=el("span","wx-ic");icn.innerHTML=ICON[ic];const tw=el("div");tw.append(el("div","wx-t",Math.round(c.temperature_2m)+"°C"),el("div","wx-c",lab));now.append(icn,tw);
+const st=el("dl","wx-stats");[["Cảm giác như",Math.round(c.apparent_temperature)+"°C"],["Độ ẩm",Math.round(c.relative_humidity_2m)+"%"],["Gió",Math.round(c.wind_speed_10m)+" km/h"],["Khả năng mưa hôm nay",(dl.precipitation_probability_max[0]??0)+"%"]].forEach(([k,v])=>{const row=el("div");row.append(el("dt","",k),el("dd","",v));st.append(row)});
+const days=el("div","wx-days");dl.time.forEach((t,i)=>{const x=dm(t),cell=el("div","wx-day");cell.append(el("b","",i===0?"Hôm nay":WD[x.d.getDay()]),el("span","",wmo(dl.weather_code[i])[0]),el("span","",Math.round(dl.temperature_2m_min[i])+"–"+Math.round(dl.temperature_2m_max[i])+"°C"),el("span","","Mưa "+(dl.precipitation_probability_max[i]??0)+"%"));days.append(cell)});
+body.replaceChildren(now,st,days);
+const rainy=(dl.precipitation_probability_max[0]||0)>=60||c.precipitation>0;
+if(rainy)body.append(el("p","wx-tip","Hôm nay có khả năng mưa, bạn nên mang theo áo mưa mỏng và giày dễ khô."));
+if(t0.m===10||t0.m===11)body.append(el("p","wx-tip","Theo bài viết của vietnamtourism.com, tháng 10 và 11 thường mưa nhiều và có nguy cơ ngập lụt ở Huế. Hãy theo dõi dự báo chính thức trước chuyến đi."))
+}catch(e){fail()}}
+load()})();
 route();
 </script>
 </body>
