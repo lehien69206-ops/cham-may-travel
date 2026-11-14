@@ -557,6 +557,25 @@ footer{border-top:3px solid var(--gold)}
 .wx-body>.wx-tip{margin:0}
 
 .hv-form{gap:10px}.hv-form .err:empty{display:none}
+
+/* ===== Cột đánh giá cuộn dọc: cao đúng bằng khung form (tiêu đề → nút Gửi đánh giá) ===== */
+.hv-col{display:flex;flex-direction:column;min-height:0}
+.hv-col #hv-sum{flex:none}
+.hv-col .hv-more-wrap{flex:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;margin-top:14px}
+.hv-col .hv-list{align-content:start;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;padding:4px 8px 6px 2px;scroll-padding-block:8px}
+.hv-col .hv-card{box-shadow:0 8px 18px -12px rgba(59,36,21,.45)}
+.hv-col .hv-list::-webkit-scrollbar{width:8px}.hv-col .hv-list::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:8px}
+.hv-run{background:none;border:1.5px solid var(--line-strong);color:var(--tx);border-radius:999px;padding:5px 14px;font:inherit;font-size:14px;cursor:pointer;transition:background .3s,border-color .3s}.hv-run:hover{border-color:var(--ac);background:var(--card)}
+@media(min-width:901px){
+  .hv-grid{align-items:stretch}
+  .hv-grid>.rv:first-child{position:relative;height:auto;min-height:320px}
+  .hv-col{position:absolute;inset:0}
+  .hv-col .hv-list{flex:1 1 0;min-height:0;overflow-y:auto;-webkit-mask-image:linear-gradient(transparent 0,#000 12px,#000 calc(100% - 26px),transparent 100%);mask-image:linear-gradient(transparent 0,#000 12px,#000 calc(100% - 26px),transparent 100%)}
+  .hv-form{align-self:start}
+}
+@media(max-width:900px){
+  .hv-col .hv-list{max-height:min(68vh,520px);overflow-y:auto}
+}
 </style>
 </head>
 <body>
@@ -627,7 +646,7 @@ footer{border-top:3px solid var(--gold)}
 <section id="cau-chuyen" style="background:var(--bg-alt)"><div class="wrap">
 <div class="shead rv"><h2>Câu chuyện khách hàng</h2><p>Những chia sẻ thật từ khách đã đi cùng Chạm Mây. Bạn đã đi cùng chúng mình? Hãy kể lại chuyến đi của bạn.</p></div>
 <div class="hv-grid">
-<div class="rv"><div id="hv-sum"></div><div id="hv-list" class="hv-list" aria-live="polite"></div><div class="hv-more-wrap"><a class="hv-more" href="#/cau-chuyen-khach-hang">Xem thêm câu chuyện <span aria-hidden="true">→</span></a></div></div>
+<div class="rv"><div class="hv-col"><div id="hv-sum"></div><div id="hv-list" class="hv-list" role="region" aria-label="Danh sách đánh giá của khách" tabindex="0" aria-live="polite"></div><div class="hv-more-wrap"><a class="hv-more" href="#/cau-chuyen-khach-hang">Xem thêm câu chuyện <span aria-hidden="true">→</span></a><button type="button" class="hv-run" id="hv-run" hidden>Tạm dừng cuộn</button></div></div></div>
 <form id="hv-form" class="hv-form rv" novalidate>
 <h3>Chia sẻ chuyến đi của bạn</h3>
 <label class="f">Bạn đã đi combo nào?<select id="hv-combo"></select><span class="err" id="hve-combo"></span></label>
@@ -1257,7 +1276,7 @@ function hvStars(n){return "★".repeat(n)+"☆".repeat(5-n)}
 function renderHv(){const sum=$("#hv-sum"),list=$("#hv-list");if(!sum||!list)return;sum.replaceChildren();list.replaceChildren();
 if(!RV.length){const m=document.createElement("div");m.className="msg";m.textContent="Chưa có đánh giá thật. Đánh giá của khách sẽ hiển thị ở đây sau khi được Chạm Mây xem xét. Chúng mình không đăng đánh giá mẫu.";list.append(m);return}
 const avg=RV.reduce((t,r)=>t+r.s,0)/RV.length,a=document.createElement("p"),b=document.createElement("b"),st=document.createElement("span");a.className="hv-avg";b.textContent=avg.toFixed(1).replace(".",",")+" / 5";st.className="hv-st";st.textContent=hvStars(Math.round(avg));st.setAttribute("aria-hidden","true");a.append(b," ",st," · "+RV.length+" đánh giá");sum.append(a);
-RV.slice(0,6).forEach(r=>{const c=document.createElement("article"),s=document.createElement("div"),p=document.createElement("p"),by=document.createElement("div"),n=document.createElement("b"),cb=document.createElement("span");
+RV.slice(0,12).forEach(r=>{const c=document.createElement("article"),s=document.createElement("div"),p=document.createElement("p"),by=document.createElement("div"),n=document.createElement("b"),cb=document.createElement("span");
 c.className="hv-card";s.className="hv-st";s.setAttribute("role","img");s.setAttribute("aria-label",r.s+" trên 5 sao");s.textContent=hvStars(r.s);const preview=r.t.trim();p.textContent=preview.length>150?preview.slice(0,150).trimEnd()+"…":preview;by.className="hv-by";n.textContent=r.n;
 const combo=COMBOS.find(x=>x.id===r.c);cb.textContent=combo?"Combo: "+combo.n:"Chạm Mây Travel";by.append(n,cb);
 if(r.d){const dt=new Date(r.d);if(!isNaN(dt)){const t=document.createElement("time");t.dateTime=dt.toISOString();t.textContent=dt.toLocaleDateString("vi-VN");by.append(t)}}
@@ -1292,6 +1311,23 @@ catch(err){console.error("Home review submit error:",err);say("Hãy thử lại 
 finally{btn.disabled=false;btn.textContent=old}}})();
 renderHv();
 loadReviews();
+/* Cột đánh giá tự cuộn chậm; dừng khi rê chuột, chạm, focus hoặc bấm nút; tắt khi người dùng chọn giảm chuyển động */
+(()=>{const list=$("#hv-list"),btn=$("#hv-run");if(!list||!btn)return;
+const rm=matchMedia("(prefers-reduced-motion:reduce)");let paused=rm.matches,hov=false,hold=0,last=0,pos=0;
+const lab=()=>{btn.textContent=paused?"Tự cuộn đánh giá":"Tạm dừng cuộn"};lab();
+btn.onclick=()=>{paused=!paused;lab()};
+list.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse")hov=true});list.addEventListener("pointerleave",()=>{hov=false});
+list.addEventListener("focusin",()=>{hov=true});list.addEventListener("focusout",()=>{hov=false});
+const bump=()=>{hold=4500};list.addEventListener("wheel",bump,{passive:true});list.addEventListener("touchstart",bump,{passive:true});list.addEventListener("keydown",bump);
+const step=t=>{requestAnimationFrame(step);const dt=Math.min(t-(last||t),50);last=t;
+const max=list.scrollHeight-list.clientHeight,can=max>4;if(btn.hidden===can)btn.hidden=!can;
+if(!can||paused||hov||document.hidden)return;
+const r=list.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;
+if(hold>0){hold-=dt;return}
+if(Math.abs(list.scrollTop-pos)>2)pos=list.scrollTop;
+if(pos>=max-1){hold=3500;pos=0;list.scrollTo({top:0,behavior:"smooth"});return}
+pos=Math.min(max,pos+dt*.03);list.scrollTop=pos};
+requestAnimationFrame(step)})();
 
 /* Trang con: địa điểm & chính sách */
 function renderPlace(s){const p=pById[s],i=PLACES.indexOf(p),acts=pAct(p),h=acts.reduce((t,a)=>t+a.h,0),cb=pCombos(p),pv=PLACES[(i+PLACES.length-1)%PLACES.length],nx=PLACES[(i+1)%PLACES.length];
